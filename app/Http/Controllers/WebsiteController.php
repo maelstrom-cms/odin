@@ -95,6 +95,7 @@ class WebsiteController extends Controller
             'robots_enabled' => 'boolean',
             'dns_enabled' => 'boolean',
             'uptime_enabled' => 'boolean',
+            'uptime_keyword' => 'required_if:uptime_enabled,1'
         ]);
 
         $this->panel->beforeSave(function ($data) use ($request) {
@@ -148,6 +149,7 @@ class WebsiteController extends Controller
             'robots_enabled' => 'boolean',
             'dns_enabled' => 'boolean',
             'uptime_enabled' => 'boolean',
+            'uptime_keyword' => 'required_if:uptime_enabled,1'
         ]);
 
         $this->panel->setEntry($website);

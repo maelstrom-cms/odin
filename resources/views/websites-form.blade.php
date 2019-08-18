@@ -23,7 +23,8 @@
 
             @include('maelstrom::inputs.switch', [
                 'name' => 'uptime_enabled',
-                'label' => 'Enable Up-Time Monitoring?'
+                'label' => 'Enable Up-Time Monitoring?',
+                'hide_off' => ['uptime_keyword'],
             ])
 
             @include('maelstrom::inputs.switch', [
@@ -36,6 +37,14 @@
                 'label' => 'Enable DNS Monitoring?'
             ])
         </div>
+
+        @include('maelstrom::inputs.text', [
+            'name' => 'uptime_keyword',
+            'label' => 'Uptime Keyword',
+            'help' => 'This word *must* exist on the web page to confirm the site is online.',
+            'prefix' => '🔑',
+            //'required' => true,
+        ])
 
     @endcomponent
 

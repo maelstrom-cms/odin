@@ -11,42 +11,23 @@ export default class UptimeReport extends React.Component {
 
     state = {
         website: JSON.parse(this.props.website),
-        loading: false,
+        loading: true,
         uptime: {
-            total: 60,
-            month: 95,
-            week: 70,
-            day: 20,
+            total: '-',
+            month: '-',
+            week: '-',
+            day: '-',
         },
-        response_time: 100,
-        response_times: [
-            { date: '2019-01-01 10:10:10', value: 200 },
-            { date: '2019-01-02 10:10:10', value: 100 },
-            { date: '2019-01-03 10:10:10', value: 200 },
-            { date: '2019-01-04 10:10:10', value: 150 },
-            { date: '2019-01-06 10:10:10', value: 150 },
-            { date: '2019-01-06 10:10:10', value: 150 },
-            { date: '2019-01-06 10:10:10', value: 150 },
-            { date: '2019-01-07 10:10:10', value: 150 },
-            { date: '2019-01-08 10:10:10', value: 150 },
-        ],
+        response_time: '-',
+        response_times: [],
         online: true,
-        online_time: '2 days',
-        last_incident: 'Monday 28th June - Downtime lasted 2 minutes.',
-        events: [
-            { id: '1', date: '2019-01-01 10:10:10', type: 'down', reason: 'xxx', duration: '30 mins' },
-            { id: '2', date: '2019-01-02 10:10:10', type: 'up', reason: 'xxx', duration: '30 mins' },
-            { id: '3', date: '2019-01-03 10:10:10', type: 'down', reason: 'xxx', duration: '30 mins' },
-            { id: '4', date: '2019-01-04 10:10:10', type: 'down', reason: 'xxx', duration: '30 mins' },
-            { id: '5', date: '2019-01-05 10:10:10', type: 'up', reason: 'xxx', duration: '30 mins' },
-            { id: '6', date: '2019-01-06 10:10:10', type: 'down', reason: 'xxx', duration: '30 mins' },
-            { id: '7', date: '2019-01-07 10:10:10', type: 'down', reason: 'xxx', duration: '30 mins' },
-            { id: '8', date: '2019-01-08 10:10:10', type: 'down', reason: 'xxx', duration: '30 mins' },
-        ],
+        online_time: '-',
+        last_incident: '-',
+        events: [],
     };
 
     componentDidMount() {
-        // this.update();
+        this.update();
     }
 
     update = async(refresh = false) => {
@@ -54,7 +35,7 @@ export default class UptimeReport extends React.Component {
             loading: true
         });
 
-        let endpoint = window.location.href + '/robots';
+        let endpoint = window.location.href + '/uptime';
 
         if (refresh) {
             endpoint += '?refresh=1';
@@ -110,8 +91,8 @@ export default class UptimeReport extends React.Component {
                             scales: {
                                 xAxes: [{ display: false }],
                                 yAxes: [{ ticks: {
-                                    suggestedMax: (Math.max(...data)) + 50,
-                                    suggestedMin: (Math.min(...data)) - 50
+                                    suggestedMax: (Math.max(...data)) + 1,
+                                    suggestedMin: 0
                                 }}],
                             },
                         }}
