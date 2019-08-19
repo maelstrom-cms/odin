@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CertificateCheck;
+use App\Jobs\RobotsCheck;
+use App\Website;
 use Illuminate\Console\Command;
 
 class ScanRobotsCommand extends Command
@@ -11,7 +14,7 @@ class ScanRobotsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'scan:robots';
 
     /**
      * The console command description.
@@ -37,6 +40,9 @@ class ScanRobotsCommand extends Command
      */
     public function handle()
     {
-        //
+        Website::all()->each(function (Website $website) {
+            RobotsCheck::dispatch($website);
+            dump('Robots check queued for ' . $website->url);
+        });
     }
 }

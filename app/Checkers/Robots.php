@@ -8,7 +8,6 @@ use App\Website;
 use SebastianBergmann\Diff\Differ;
 use App\Notifications\RobotsHasChanged;
 
-
 class Robots
 {
     private $website;

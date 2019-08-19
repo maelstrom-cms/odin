@@ -10,6 +10,7 @@ class Website extends Model
     use HasRobots;
     use HasCertificates;
     use HasDns;
+    use HasOpenGraph;
 
     protected $fillable = [
         'url',

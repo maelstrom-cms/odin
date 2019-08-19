@@ -23,4 +23,5 @@ Route::middleware('auth')->group(function () {
     Route::get('websites/{website}/uptime', 'UptimeReportController');
     Route::get('websites/{website}/ssl', 'CertificateReportController');
     Route::get('websites/{website}/dns', 'DnsCompareController');
+    Route::get('websites/{website}/opengraph', 'OpenGraphController');
 });

@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CertificateCheck;
+use App\Jobs\DnsCheck;
+use App\Website;
 use Illuminate\Console\Command;
 
 class ScanDnsCommand extends Command
@@ -11,7 +14,7 @@ class ScanDnsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'scan:dns';
 
     /**
      * The console command description.
@@ -37,6 +40,9 @@ class ScanDnsCommand extends Command
      */
     public function handle()
     {
-        //
+        Website::all()->each(function (Website $website) {
+            DnsCheck::dispatch($website);
+            dump('DNS check queued for ' . $website->url);
+        });
     }
 }

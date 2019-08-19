@@ -16,6 +16,8 @@
 
 @section('content')
 
+    <div class="mb-10" data-component="OpenGraph" data-website='@json($website)'></div>
+
     @if ($website->uptime_enabled)
     <div class="mb-10" data-component="UptimeReport" data-website='@json($website)'></div>
     @endif
@@ -31,6 +33,8 @@
     @if ($website->dns_enabled)
     <div class="mb-10" data-component="DnsReport" data-website='@json($website)'></div>
     @endif
+
+
 
 @endsection
 

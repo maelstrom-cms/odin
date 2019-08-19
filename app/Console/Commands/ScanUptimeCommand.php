@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CertificateCheck;
+use App\Jobs\UptimeCheck;
+use App\Website;
 use Illuminate\Console\Command;
 
 class ScanUptimeCommand extends Command
@@ -11,7 +14,7 @@ class ScanUptimeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'scan:uptime';
 
     /**
      * The console command description.
@@ -37,6 +40,9 @@ class ScanUptimeCommand extends Command
      */
     public function handle()
     {
-        //
+        Website::all()->each(function (Website $website) {
+            UptimeCheck::dispatch($website);
+            dump('Uptime check queued for ' . $website->url);
+        });
     }
 }

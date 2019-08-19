@@ -10,7 +10,6 @@ use SebastianBergmann\Diff\Differ;
 use App\Notifications\WebsiteIsDown;
 use App\Notifications\WebsiteIsBackUp;
 
-
 class Uptime
 {
     private $website;
