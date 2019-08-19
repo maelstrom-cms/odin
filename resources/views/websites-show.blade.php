@@ -16,17 +16,21 @@
 
 @section('content')
 
-    @if ($website->robots_enabled)
-    <div class="mb-10" data-component="RobotsReport" data-website='@json($website)'></div>
-    @endif
-
     @if ($website->uptime_enabled)
     <div class="mb-10" data-component="UptimeReport" data-website='@json($website)'></div>
     @endif
 
-
+    @if ($website->ssl_enabled)
     <div class="mb-10" data-component="CertificateReport" data-website='@json($website)'></div>
+    @endif
+
+    @if ($website->robots_enabled)
+        <div class="mb-10" data-component="RobotsReport" data-website='@json($website)'></div>
+    @endif
+
+    @if ($website->dns_enabled)
     <div class="mb-10" data-component="DnsReport" data-website='@json($website)'></div>
+    @endif
 
 @endsection
 

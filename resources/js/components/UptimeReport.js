@@ -1,11 +1,7 @@
 import React from 'react';
 import { Card, Button, Spin, Progress, Icon, Table, Tag } from 'antd';
 import { Line } from 'react-chartjs-2'
-import { formatDateTime } from '../helpers';
-
-const GREEN = '#72c040';
-const YELLOW = '#efaf41';
-const RED = '#e23c39';
+import { formatDateTime, GREEN, YELLOW, RED } from '../helpers';
 
 export default class UptimeReport extends React.Component {
 
@@ -201,17 +197,17 @@ export default class UptimeReport extends React.Component {
     renderEvents() {
 
         const tag = function (row) {
-            const color = row.type === 'up' ? 'green' : 'red';
-            const icon = row.type === 'up' ? 'arrow-up' : 'arrow-down';
+            const color = row.state === 'up' ? 'green' : 'red';
+            const icon = row.state === 'up' ? 'arrow-up' : 'arrow-down';
 
             return <Tag color={ color }>
                 <Icon type={ icon } style={{ marginRight: 5 }} />
-                { row.type }
+                { row.state }
             </Tag>
         };
 
         const reason = function (row) {
-            const color = row.type === 'up' ? GREEN : RED;
+            const color = row.state === 'up' ? GREEN : RED;
 
             return <span style={{ color }}>{ row.reason }</span>
         };
@@ -222,9 +218,9 @@ export default class UptimeReport extends React.Component {
                     pagination={ false }
                     width="100%"
                     dataSource={ this.state.events }
-                    rowKey="id"
+                    rowKey="date"
                     columns={[
-                        { key: 'event', title: 'Recent Events', dataIndex: 'type', render: (text, row) => tag(row)},
+                        { key: 'event', title: 'Recent Events', dataIndex: 'state', render: (text, row) => tag(row)},
                         { key: 'date', title: 'Time', dataIndex: 'date', render: text => formatDateTime(text) },
                         { key: 'reason', title: 'Reason', dataIndex: 'reason', render: (text, row) =>  reason(row)},
                         { key: 'duration', title: 'Duration', dataIndex: 'duration' },

@@ -11,6 +11,7 @@ class RobotCompareController extends Controller
     /**
      * Handle the incoming request.
      *
+     * @param Request $request
      * @param Website $website
      * @return array
      */

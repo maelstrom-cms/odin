@@ -46,6 +46,14 @@ class Robots
 
         $diff = (new Differ)->diff($scans->last()->txt, $scans->first()->txt);
 
+        $placeholder = '--- Original
++++ New
+';
+
+        if ($diff === $placeholder) {
+            $diff = null;
+        }
+
         $scans->first()->diff = $diff;
         $scans->first()->save();
     }

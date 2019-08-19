@@ -8,6 +8,8 @@ class Website extends Model
 {
     use HasUptime;
     use HasRobots;
+    use HasCertificates;
+    use HasDns;
 
     protected $fillable = [
         'url',

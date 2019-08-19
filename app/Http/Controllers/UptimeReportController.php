@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\UptimeScan;
 use App\Website;
+use App\Jobs\UptimeCheck;
 use Illuminate\Http\Request;
 
 class UptimeReportController extends Controller
@@ -11,12 +11,16 @@ class UptimeReportController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Website $website
      * @return array
      */
     public function __invoke(Request $request, Website $website)
     {
+        if ($request->has('refresh')) {
+            UptimeCheck::dispatchNow($website);
+        }
+
         $website->load(['uptimes']);
 
         $response = [
@@ -26,15 +30,7 @@ class UptimeReportController extends Controller
             'online' => $website->current_state,
             'online_time' => $website->uptime,
             'last_incident' => $website->last_incident,
-            'events' => $website->recent_events->transform(function (UptimeScan $scan) {
-                return [
-                    'id' => $scan->getKey(),
-                    'date' => $scan->created_at,
-                    'type' => $scan->was_online ? 'up' : 'down',
-                    'reason' => $scan->response_status,
-                    'duration' => 10,
-                ];
-            })->values(),
+            'events' => $website->recent_events,
         ];
 
         // return view('debug', ['data' => $response]);

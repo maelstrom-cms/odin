@@ -21,4 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('websites', 'WebsiteController');
     Route::get('websites/{website}/robots', 'RobotCompareController');
     Route::get('websites/{website}/uptime', 'UptimeReportController');
+    Route::get('websites/{website}/ssl', 'CertificateReportController');
+    Route::get('websites/{website}/dns', 'DnsCompareController');
 });

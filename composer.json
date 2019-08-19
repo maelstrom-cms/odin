@@ -9,12 +9,20 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "amhr/laravel-dnsparser": "^1.3@dev",
+        "andyftw/ssllabs-php": "^1.2",
+        "doctrine/annotations": "^1.7",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "maelstrom-cms/toolkit": "^1.0",
-        "sebastian/diff": "^3.0"
+        "sebastian/diff": "^3.0",
+        "spatie/dns": "^1.4",
+        "spatie/ssl-certificate": "^1.15",
+        "visualappeal/php-ssllabs-api": "^1.0",
+        "whoisdoma/dnsparser": "dev-master",
+        "whoisdoma/domainparser": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

@@ -2,11 +2,9 @@
 
 namespace App\Checkers;
 
-use App\RobotScan;
+use App\Website;
 use App\UptimeScan;
 use GuzzleHttp\Client;
-use App\Website;
-use GuzzleHttp\TransferStats;
 use Illuminate\Support\Str;
 use SebastianBergmann\Diff\Differ;
 
@@ -23,7 +21,7 @@ class Uptime
     public function run()
     {
         $this->fetch();
-//        $this->compare();
+        $this->notify();
     }
 
     private function fetch()
@@ -43,26 +41,25 @@ class Uptime
             ],
         ]);
 
+        $keywordFound = Str::contains($response->getBody(), $this->website->uptime_keyword);
+
+        if (!$keywordFound && $response->getStatusCode() == '200') {
+            $reason = sprintf('Keyword: %s not found (%d)', $this->website->uptime_keyword, 200);
+        } else {
+            $reason = sprintf('%s (%d)', $response->getReasonPhrase(), $response->getStatusCode());
+        }
+
         $scan = new UptimeScan([
-            'response_status' => sprintf('%s (%d)', $response->getReasonPhrase(), $response->getStatusCode()),
+            'response_status' => $reason,
             'response_time' => $response_time,
-            'was_online' => Str::contains($response->getBody(), $this->website->uptime_keyword)
+            'was_online' => $keywordFound,
         ]);
 
         $this->website->uptimes()->save($scan);
     }
 
-    private function compare()
+    private function notify()
     {
-        $scans = $this->website->last_robot_scans;
 
-        if ($scans->isEmpty() || $scans->count() === 1) {
-            return;
-        }
-
-        $diff = (new Differ)->diff($scans->last()->txt, $scans->first()->txt);
-
-        $scans->first()->diff = $diff;
-        $scans->first()->save();
     }
 }

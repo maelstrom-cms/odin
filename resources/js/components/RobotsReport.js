@@ -14,7 +14,7 @@ export default class RobotsReport extends React.Component {
 
     componentDidMount() {
         this.update();
-    }
+    };
 
     update = async(refresh = false) => {
         await this.setState({
@@ -57,7 +57,7 @@ export default class RobotsReport extends React.Component {
                 />
             </>
         )
-    }
+    };
 
     renderBusy = () => {
         const { now, previous } = this.state;

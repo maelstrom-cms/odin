@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App;
-
 
 use Illuminate\Support\Collection;
 
@@ -11,11 +9,6 @@ trait HasUptime
     public function uptimes()
     {
         return $this->hasMany(UptimeScan::class)->orderBy('created_at', 'desc');
-    }
-
-    public function getRecentEventsAttribute()
-    {
-        return $this->uptimes->sortByDesc('created_at')->take(10);
     }
 
     public function getLastIncidentAttribute()
@@ -103,6 +96,15 @@ trait HasUptime
         /* @var Collection $events */
         $events = $this->uptimes;
 
+        if ($events->isEmpty()) {
+            return [
+                'total' => 0,
+                'day' => 0,
+                'week' => 0,
+                'month' => 0,
+            ];
+        }
+
         $upCount = $events->where('was_online', 1);
         $totalPercentage = ($upCount->count() * 100) / $events->count();
 
@@ -137,5 +139,54 @@ trait HasUptime
             'week' => floor($weeklyPercentage),
             'month' => floor($monthlyPercentage),
         ];
+    }
+
+    public function getRecentEventsAttribute()
+    {
+        //'id' => $scan->getKey(),
+        //'date' => $scan->created_at,
+        //'type' => $scan->was_online ? 'up' : 'down',
+        //'reason' => $scan->response_status,
+        //'duration' => 10,
+
+        $events = $this->uptimes->sortByDesc('created_at')->values();
+
+        $grouped = [];
+        $lastType = null;
+
+        foreach ($events as $pos => $event) {
+            // If its null then we've only just started!
+            if (is_null($lastType)) {
+                $grouped[] = collect();
+                $lastType = $event->online;
+            }
+
+            // If the event is the same as the previous
+            // we just bundle them together
+            if ($lastType === $event->online) {
+                $last = end($grouped);
+                $last->push($event);
+            }
+            // if its a different event, we start a new group!
+            else {
+                $lastType = $event->online;
+                $grouped[] = collect();
+                $last = end($grouped);
+                $last->push($event);
+            }
+        }
+
+        $grouped = collect($grouped)->take(10);
+
+        return $grouped->transform(function ($group) {
+            $events = $group->sortBy('created_at');
+
+            return [
+                'state' => $events->first()->online ? 'up' : 'down',
+                'reason' => $events->first()->response_status,
+                'date' => $events->first()->created_at,
+                'duration' => $events->first()->created_at->diffAsCarbonInterval($events->last()->created_at)->forHumans(['join' => true]),
+            ];
+        });
     }
 }
