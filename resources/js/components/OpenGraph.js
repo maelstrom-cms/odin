@@ -55,12 +55,12 @@ export default class RobotsReport extends React.Component {
         return (
             <div className="flex flex-wrap items-center">
                 <div className="w-1/2 pr-8">
-                    <img className="w-full h-auto shadow-lg" src={ image } alt={ title } />
+                    { image ? <img className="w-full h-auto shadow-lg" src={ image } alt={ title } /> : <p>No image fround.</p>}
                 </div>
                 <div className="w-1/2">
-                    <h2>{ title }</h2>
-                    <p>{ description }</p>
-                    <a href={ url } rel="noreferrer noopener" target="_blank"><small>{ url }</small></a>
+                    <h2>{ title || 'No title found.' }</h2>
+                    <p>{ description || 'No description found.' }</p>
+                    { url ? <a href={ url } rel="noreferrer noopener" target="_blank"><small>{ url }</small></a> : <p>No URL found.</p>}
                 </div>
             </div>
         )

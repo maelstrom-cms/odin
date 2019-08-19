@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Spin, Progress, Icon, Tree, Tag } from 'antd';
+import { Card, Button, Spin, Progress, Icon, Tree, Tag, notification } from 'antd';
 import {formatDateTime, GREEN, RED, YELLOW} from "../helpers";
 import { NoData } from '../helpers'
 
@@ -37,6 +37,14 @@ export default class CertificateReport extends React.Component {
         }
 
         const response = (await window.axios.get(endpoint)).data;
+
+        if (response.state) {
+            notification.warning({
+                message: 'SSL Checker',
+                description: response.state,
+                placement: 'bottomRight',
+            });
+        }
 
         this.setState({
             ...response,
@@ -102,7 +110,7 @@ export default class CertificateReport extends React.Component {
                 <Tag color="green">{ this.state.domain }</Tag>
 
                 <h4 className="mt-5">Additional Domains</h4>
-                { this.state.additional_domains.map(i => <Tag className="mb-2" key={ i }>{ i }</Tag>) }
+                { this.state.additional_domains.map(i => <Tag onDoubleClick={ () => window.open(`https://${i}`) } className="mb-2" key={ i }>{ i }</Tag>) }
 
                 <div className="flex flex-wrap mt-5">
                     <div className="w-1/2 pr-5">

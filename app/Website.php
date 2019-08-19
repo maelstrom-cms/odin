@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Website extends Model
@@ -21,6 +22,16 @@ class Website extends Model
         'robots_enabled',
         'dns_enabled',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('team', function (Builder $builder) {
+            $user = auth()->user()->id;
+            $builder->where('user_id', $user);
+        });
+    }
 
     public function user()
     {
