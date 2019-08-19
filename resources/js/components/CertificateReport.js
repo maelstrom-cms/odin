@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button, Spin, Progress, Icon, Tree, Tag } from 'antd';
 import {formatDateTime, GREEN, RED, YELLOW} from "../helpers";
+import { NoData } from '../helpers'
 
 const TreeNode = Tree.TreeNode;
 
@@ -80,16 +81,16 @@ export default class CertificateReport extends React.Component {
                     format={ () => <span className={`${ this.state.grade === 'N/A' ? 'text-4xl' : 'text-6xl'} font-bold`} style={{ color: color(this.state.grade) }}>{ this.state.grade }</span> }
                 />
 
-                <div className="mt-8 pr-12">
+                { this.state.issuer && <div className="mt-8 pr-12">
                     <div>
                         <div className="font-bold mb-2">Issued By:</div>
-                        { this.state.issuer}
+                        { this.state.issuer }
                     </div>
                     <div className="mt-2">
                         <div className="font-bold mb-2">Issued On:</div>
                         { formatDateTime(this.state.valid_from) }
                     </div>
-                </div>
+                </div> }
             </>
         )
     };
@@ -126,6 +127,10 @@ export default class CertificateReport extends React.Component {
     };
 
     renderReport = () => {
+        if (!this.state.issuer) {
+            return <NoData />
+        }
+
         return (
             <div className="flex">
                 <div className="w-1/4 pr-7">

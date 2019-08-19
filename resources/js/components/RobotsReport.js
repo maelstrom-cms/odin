@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, Spin } from 'antd';
 import ReactDiffViewer from 'react-diff-viewer'
 import { formatDateTime } from "../helpers";
+import { NoData } from '../helpers'
 
 export default class RobotsReport extends React.Component {
 
@@ -42,10 +43,14 @@ export default class RobotsReport extends React.Component {
     renderReport = () => {
         const { now, previous } = this.state;
 
+        if (!now) {
+            return <NoData />
+        }
+
         return (
             <>
                 <div className="flex">
-                    <div className="w-1/2"><h3>Before ({ previous && formatDateTime(previous.created_at) })</h3></div>
+                    { previous && <div className="w-1/2"><h3>Before ({ previous && formatDateTime(previous.created_at) })</h3></div> }
                     <div className="w-1/2"><h3>Now ({ now && formatDateTime(now.created_at) })</h3></div>
                 </div>
 

@@ -12,6 +12,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 class DnsHasChanged extends Notification
 {
     use Queueable;
+
     /**
      * @var Website
      */

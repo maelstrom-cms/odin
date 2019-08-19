@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, Spin, Progress, Icon, Table, Tag } from 'antd';
 import { Line } from 'react-chartjs-2'
 import { formatDateTime, GREEN, YELLOW, RED } from '../helpers';
+import { NoData } from '../helpers'
 
 export default class UptimeReport extends React.Component {
 
@@ -230,8 +231,11 @@ export default class UptimeReport extends React.Component {
         )
     };
 
-    renderReport = () => {
-        const { now, previous } = this.state;
+    renderReport = () =>{
+
+        if (!this.state.events.length) {
+            return <NoData />
+        }
 
         return (
             <div className="flex flex-wrap">

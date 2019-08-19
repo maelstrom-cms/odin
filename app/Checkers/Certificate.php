@@ -5,11 +5,18 @@ namespace App\Checkers;
 use App\Website;
 use App\CertificateScan;
 use VisualAppeal\SslLabs;
+use App\Notifications\CertificateIsWeak;
 use Spatie\SslCertificate\SslCertificate;
+use App\Notifications\CertificateIsInvalid;
+use App\Notifications\CertificateWillExpire;
+use App\Notifications\CertificateHasExpired;
+use App\Notifications\CertificateIsExpiring;
 
 class Certificate
 {
     private $website;
+
+    private $scan;
 
     public function __construct(Website $website)
     {
@@ -52,17 +59,43 @@ class Certificate
             if ($endpoint->statusMessage === 'Ready') {
                 $scan->grade = $endpoint->grade;
                 $this->website->certificates()->save($scan);
+                $this->scan = $scan;
                 break;
             }
         }
 
         if (app()->runningInConsole()) {
-            dump($scan->exists ? 'Cert Updated' : 'Pending...');
+            if (!$scan->exists) {
+                dump('Scan still in progress...');
+                dump($result);
+            }
         }
     }
 
-    private function notify()
+    private function notify($notification = null)
     {
+        $this->scan = $this->website->certificates()->latest()->first();
 
+        if (!$this->scan) {
+            return null;
+        }
+
+        if (!$this->scan->was_valid) {
+            $notification = new CertificateIsInvalid($this->website, $this->scan);
+        } elseif ($this->scan->did_expire) {
+            $notification = new CertificateHasExpired($this->website, $this->scan);
+        } elseif (now()->diffInHours($this->scan->valid_to) <= 24) {
+            $notification = new CertificateIsExpiring($this->website, $this->scan);
+        } elseif (now()->diffInDays($this->scan->valid_to) <= 7) {
+            $notification = new CertificateWillExpire($this->website, $this->scan);
+        } elseif (in_array($this->scan->grade, ['C', 'D', 'E', 'F'])) {
+            $notification = new CertificateIsWeak($this->website, $this->scan);
+        }
+
+        if (!$notification) {
+            return null;
+        }
+
+        $this->website->user->notify($notification);
     }
 }

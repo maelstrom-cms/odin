@@ -28,24 +28,24 @@ class Dns
 
     private function fetch()
     {
-//        $response = (new DNSParser('array'))->lookup($this->website->dns_hostname);
-//
-//        $flat = collect($response['records'])->transform(function ($item) {
-//            return sprintf(
-//                '%s %s %s ttl:%d',
-//                $item['host'],
-//                $item['type'],
-//                $item['ip'] ?? $item['target'] ?? $item['mname'] ?? $item['txt'] ?? $item['ipv6'] ?? '',
-//                $item['ttl']
-//            );
-//        })->sort()->values()->implode("\n");
-//
-//        $scan = new DnsScan([
-//            'records' => $response['records'],
-//            'flat' => $flat,
-//        ]);
-//
-//        $this->website->dns()->save($scan);
+        $response = (new DNSParser('array'))->lookup($this->website->dns_hostname);
+
+        $flat = collect($response['records'])->transform(function ($item) {
+            return sprintf(
+                '%s %s %s ttl:%d',
+                $item['host'],
+                $item['type'],
+                $item['ip'] ?? $item['target'] ?? $item['mname'] ?? $item['txt'] ?? $item['ipv6'] ?? '',
+                $item['ttl']
+            );
+        })->sort()->values()->implode("\n");
+
+        $scan = new DnsScan([
+            'records' => $response['records'],
+            'flat' => $flat,
+        ]);
+
+        $this->website->dns()->save($scan);
     }
 
     private function compare()
