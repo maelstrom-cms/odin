@@ -1,7 +1,7 @@
 @component('mail::message')
-# 🤖 Robots change detected on:  {{ $website->url }}
+# 📚 DNS change detected on:  {{ $website->url }}
 
-The robots.txt file has changed since the last scan - please check and make any necessary changes.
+The public DNS file has changed since the last scan - please check and make any necessary changes.
 
 Please see the diff below:
 

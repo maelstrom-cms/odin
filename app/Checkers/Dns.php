@@ -6,11 +6,13 @@ use App\DnsScan;
 use App\Website;
 use Whoisdoma\DNSParser\DNSParser;
 use SebastianBergmann\Diff\Differ;
-use Spatie\Dns\Dns as DnsLookup;
+use App\Notifications\DnsHasChanged;
 
 class Dns
 {
     private $website;
+
+    private $scan;
 
     public function __construct(Website $website)
     {
@@ -26,24 +28,24 @@ class Dns
 
     private function fetch()
     {
-        $response = (new DNSParser('array'))->lookup($this->website->dns_hostname);
-
-        $flat = collect($response['records'])->transform(function ($item) {
-            return sprintf(
-                '%s %s %s ttl:%d',
-                $item['host'],
-                $item['type'],
-                $item['ip'] ?? $item['target'] ?? $item['mname'] ?? $item['txt'] ?? $item['ipv6'] ?? '',
-                $item['ttl']
-            );
-        })->sort()->values()->implode("\n");
-
-        $scan = new DnsScan([
-            'records' => $response['records'],
-            'flat' => $flat,
-        ]);
-
-        $this->website->dns()->save($scan);
+//        $response = (new DNSParser('array'))->lookup($this->website->dns_hostname);
+//
+//        $flat = collect($response['records'])->transform(function ($item) {
+//            return sprintf(
+//                '%s %s %s ttl:%d',
+//                $item['host'],
+//                $item['type'],
+//                $item['ip'] ?? $item['target'] ?? $item['mname'] ?? $item['txt'] ?? $item['ipv6'] ?? '',
+//                $item['ttl']
+//            );
+//        })->sort()->values()->implode("\n");
+//
+//        $scan = new DnsScan([
+//            'records' => $response['records'],
+//            'flat' => $flat,
+//        ]);
+//
+//        $this->website->dns()->save($scan);
     }
 
     private function compare()
@@ -69,10 +71,22 @@ class Dns
 
         $scans->first()->diff = $diff;
         $scans->first()->save();
+
+        $this->scan = $scans->first();
     }
 
     private function notify()
     {
+        if (!$this->scan) {
+            return null;
+        }
 
+        if (empty($this->scan->diff)) {
+            return null;
+        }
+
+        $this->website->user->notify(
+            new DnsHasChanged($this->website, $this->scan)
+        );
     }
 }
