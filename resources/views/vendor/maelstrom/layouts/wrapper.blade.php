@@ -10,7 +10,9 @@
         @include('maelstrom::partials.header')
 
         <main class="p-6">
-            @yield('main')
+            <div>
+                @yield('main')
+            </div>
         </main>
 
     </div>
