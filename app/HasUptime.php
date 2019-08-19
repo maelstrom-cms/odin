@@ -22,12 +22,10 @@ trait HasUptime
             return 'No downtime recorded';
         }
 
-        $downtime = 'xxx';
+        $downtime = $this->time_spent_offline;
         $when = $event->created_at->format('D jS M "y @ h:ia');
 
         return sprintf('Was down for %s on %s', $downtime, $when);
-
-        return 'Will update later';
     }
 
     public function getCurrentStateAttribute()
@@ -143,12 +141,6 @@ trait HasUptime
 
     public function getRecentEventsAttribute()
     {
-        //'id' => $scan->getKey(),
-        //'date' => $scan->created_at,
-        //'type' => $scan->was_online ? 'up' : 'down',
-        //'reason' => $scan->response_status,
-        //'duration' => 10,
-
         $events = $this->uptimes->sortByDesc('created_at')->values();
 
         $grouped = [];
@@ -188,5 +180,17 @@ trait HasUptime
                 'duration' => $events->first()->created_at->diffAsCarbonInterval($events->last()->created_at)->forHumans(['join' => true]),
             ];
         });
+    }
+
+    public function getTimeSpentOfflineAttribute()
+    {
+        $events = $this->recent_events;
+        $downEvent = $events->firstWhere('state', 'down');
+
+        if (!$downEvent) {
+            return 'Unknown...';
+        }
+
+        return $downEvent['duration'];
     }
 }

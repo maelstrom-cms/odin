@@ -1,5 +1,5 @@
 @component('mail::message')
-# 📚 DNS change detected on:  {{ $website->url }}
+# DNS change detected on:  {{ $website->url }}
 
 The public DNS file has changed since the last scan - please check and make any necessary changes.
 

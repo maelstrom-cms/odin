@@ -1,5 +1,5 @@
 @component('mail::message')
-# 🤖 Robots change detected on:  {{ $website->url }}
+# Robots change detected on:  {{ $website->url }}
 
 The robots.txt file has changed since the last scan - please check and make any necessary changes.
 

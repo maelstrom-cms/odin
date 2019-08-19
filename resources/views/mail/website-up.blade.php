@@ -1,7 +1,7 @@
 @component('mail::message')
-# Invalid SSL on:  {{ $website->url }}
+# Website Back Online: {{ $website->url }}
 
-Please advise the account manager to resolve.
+The website had been offline for {{ $website->time_spent_offline }}.
 
 @component('mail::button', ['url' => $website->show_link])
     Open Monitor

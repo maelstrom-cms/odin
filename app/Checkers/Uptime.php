@@ -7,6 +7,8 @@ use App\UptimeScan;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use SebastianBergmann\Diff\Differ;
+use App\Notifications\WebsiteIsDown;
+use App\Notifications\WebsiteIsBackUp;
 
 
 class Uptime
@@ -20,7 +22,7 @@ class Uptime
 
     public function run()
     {
-        $this->fetch();
+//        $this->fetch();
         $this->notify();
     }
 
@@ -60,6 +62,26 @@ class Uptime
 
     private function notify()
     {
+        return $this->website->user->notify(
+            new WebsiteIsBackUp($this->website)
+        );
+        $lastTwo = $this->website->uptimes()->orderBy('created_at', 'DESC')->take(2)->get();
 
+        if ($lastTwo->count() !== 2) {
+            return null;
+        }
+
+        $now = $lastTwo->first();
+        $previous = $lastTwo->last();
+
+        if ($now->online && $previous->offline) {
+            return $this->website->user->notify(
+                new WebsiteIsBackUp($this->website)
+            );
+        } elseif ($now->offline && $previous->online) {
+            return $this->website->user->notify(
+                new WebsiteIsDown($this->website)
+            );
+        }
     }
 }

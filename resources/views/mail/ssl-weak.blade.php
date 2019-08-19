@@ -1,5 +1,5 @@
 @component('mail::message')
-# 🔒 Weak SSL found on:  {{ $website->url }}
+# Weak SSL found on:  {{ $website->url }}
 
 Anything less than a <strong>Grade B</strong> SSL is considered weak and will get flagged.
 

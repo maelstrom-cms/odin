@@ -1,5 +1,5 @@
 @component('mail::message')
-# 🔒 The SSL is expiring this week on:  {{ $website->url }}
+# The SSL is expiring this week on:  {{ $website->url }}
 
 The SSL will expire in {{ now()->diffAsCarbonInterval($scan->valid_to)->forHumans(['join' => true]) }}
 
