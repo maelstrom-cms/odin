@@ -1,1 +1,9 @@
 @import '@maelstrom-cms/toolkit/css/maelstrom.css';
+
+.ant-input-affix-wrapper .ant-input {
+    min-height: auto;
+}
+
+.ant-input-affix-wrapper .ant-input-prefix {
+    left: 9px;
+}

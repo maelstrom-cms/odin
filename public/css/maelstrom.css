@@ -37810,6 +37810,14 @@ div.ant-typography-edit-content {
   visibility: hidden;
 }
 
+.ant-input-affix-wrapper .ant-input {
+  min-height: auto;
+}
+
+.ant-input-affix-wrapper .ant-input-prefix {
+  left: 9px;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;
