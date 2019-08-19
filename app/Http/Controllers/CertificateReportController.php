@@ -23,6 +23,12 @@ class CertificateReportController extends Controller
 
         $scan = $website->certificates()->latest()->first();
 
+        if (!$scan) {
+            return [
+                'state' => 'Scan in progress...',
+            ];
+        }
+
         return $scan;
     }
 }

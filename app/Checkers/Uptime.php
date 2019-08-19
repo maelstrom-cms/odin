@@ -21,7 +21,7 @@ class Uptime
 
     public function run()
     {
-//        $this->fetch();
+        $this->fetch();
         $this->notify();
     }
 
