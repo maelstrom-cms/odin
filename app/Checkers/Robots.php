@@ -6,11 +6,14 @@ use App\RobotScan;
 use GuzzleHttp\Client;
 use App\Website;
 use SebastianBergmann\Diff\Differ;
+use App\Notifications\RobotsHasChanged;
 
 
 class Robots
 {
     private $website;
+
+    private $scan;
 
     public function __construct(Website $website)
     {
@@ -21,6 +24,7 @@ class Robots
     {
         $this->fetch();
         $this->compare();
+        $this->notify();
     }
 
     private function fetch()
@@ -56,5 +60,22 @@ class Robots
 
         $scans->first()->diff = $diff;
         $scans->first()->save();
+
+        $this->scan = $scans->first();
+    }
+
+    private function notify()
+    {
+        if (!$this->scan) {
+            return null;
+        }
+
+        if (empty($this->scan->diff)) {
+            return null;
+        }
+
+         $this->website->user->notify(
+             new RobotsHasChanged($this->website, $this->scan)
+         );
     }
 }

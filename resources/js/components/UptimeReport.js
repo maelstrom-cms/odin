@@ -9,7 +9,7 @@ export default class UptimeReport extends React.Component {
         website: JSON.parse(this.props.website),
         loading: true,
         uptime: {
-            total: '-',
+            total: 100,
             month: '-',
             week: '-',
             day: '-',

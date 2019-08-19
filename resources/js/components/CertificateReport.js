@@ -66,6 +66,8 @@ export default class CertificateReport extends React.Component {
                   return RED;
               case 'F':
                   return RED;
+              case 'N/A':
+                  return YELLOW;
           }
         };
 
@@ -75,7 +77,7 @@ export default class CertificateReport extends React.Component {
                     strokeColor={ color(this.state.grade) }
                     type="circle"
                     percent={100}
-                    format={ () => <span className="text-6xl font-bold" style={{ color: color(this.state.grade) }}>{ this.state.grade }</span> }
+                    format={ () => <span className={`${ this.state.grade === 'N/A' ? 'text-4xl' : 'text-6xl'} font-bold`} style={{ color: color(this.state.grade) }}>{ this.state.grade }</span> }
                 />
 
                 <div className="mt-8 pr-12">

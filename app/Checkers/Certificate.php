@@ -3,8 +3,8 @@
 namespace App\Checkers;
 
 use App\Website;
-use Andyftw\SSLLabs\Api;
 use App\CertificateScan;
+use VisualAppeal\SslLabs;
 use Spatie\SslCertificate\SslCertificate;
 
 class Certificate
@@ -36,7 +36,7 @@ class Certificate
             'did_expire' => $certificate->isExpired(),
         ]);
 
-        $labs = new \VisualAppeal\SslLabs();
+        $labs = new SslLabs();
 
         $result = $labs->analyze(
             $this->website->certificate_hostname,
@@ -56,7 +56,9 @@ class Certificate
             }
         }
 
-        dump($scan->exists ? 'Cert Updated' : 'Pending...');
+        if (app()->runningInConsole()) {
+            dump($scan->exists ? 'Cert Updated' : 'Pending...');
+        }
     }
 
     private function notify()
