@@ -22,6 +22,7 @@
     "dependencies": {
         "@data-ui/sparkline": "0.0.80",
         "antd": "^3.21.4",
+        "aos": "^2.3.4",
         "chart.js": "^2.8.0",
         "react": "16.8.6",
         "react-chartjs-2": "^2.7.6",

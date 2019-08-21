@@ -5,6 +5,7 @@ import DnsReport from './components/DnsReport';
 import RobotsReport from './components/RobotsReport';
 import UptimeReport from './components/UptimeReport';
 import OpenGraph from './components/OpenGraph';
+import AOS from 'aos';
 
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -22,3 +23,5 @@ Registry.register({
 });
 
 require('@maelstrom-cms/toolkit');
+
+window.onload = AOS.init();

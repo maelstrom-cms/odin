@@ -1,4 +1,5 @@
 @import '@maelstrom-cms/toolkit/css/maelstrom.css';
+@import 'aos/dist/aos.css';
 
 .ant-input-affix-wrapper .ant-input {
     min-height: auto;

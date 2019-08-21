@@ -9,7 +9,7 @@
 @endsection
 
 @section('main')
-    <div class="w-full max-w-xs mx-auto mt-24">
+    <div data-aos="fade-in" data-aos-delay="100" data-aos-duration="1000" class="w-full max-w-xs mx-auto mt-24">
 
         @include('maelstrom::components.loader')
 
