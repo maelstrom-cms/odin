@@ -1,47 +1,48 @@
-@extends('layouts.app')
+@extends('maelstrom::layouts.wrapper')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+@push('head_after')
+    <style> body { background: #f7fafc; }</style>
+@endpush
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@section('title')
+    Reset Password
+@endsection
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+@section('main')
+    <div class="w-full max-w-xs mx-auto mt-24">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+        @include('maelstrom::components.loader')
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+        @if (session()->has('status'))
+            <div class="pb-10">
+                @include('maelstrom::components.alert', ['message' => session()->get('status')])
+            </div>
+        @endif
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        <form action="{{ route('password.email') }}" method="POST" class="cloak bg-white shadow-md rounded px-8 pt-6 mb-4">
+            @csrf()
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+            @include('maelstrom::inputs.text', [
+                'name' => 'email',
+                'label' => 'Email Address',
+                'html_type' => 'email',
+                'required' => true,
+            ])
+
+            <div class="mt-10 flex justify-between items-center">
+                @include('maelstrom::buttons.button', [
+                    'label' => 'Send Reset Email',
+                    'type' => 'primary',
+                ])
+                <div>
+                    <a class="inline-block" style="margin-bottom: 24px;" href="/login">< Login</a>
                 </div>
             </div>
-        </div>
+        </form>
+
+        <p class="mt-10 text-center text-gray-500 text-xs">
+            &copy;{{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+        </p>
+
     </div>
-</div>
 @endsection

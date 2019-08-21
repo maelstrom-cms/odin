@@ -1,4 +1,67 @@
-@extends('layouts.app')
+@extends('maelstrom::layouts.wrapper')
+
+@push('head_after')
+    <style> body { background: #f7fafc; }</style>
+@endpush
+
+@section('title')
+    Set New Password
+@endsection
+
+@section('main')
+    <div class="w-full max-w-xs mx-auto mt-24">
+
+        @include('maelstrom::components.loader')
+
+        @if (session()->has('status'))
+            <div class="pb-10">
+                @include('maelstrom::components.alert', ['message' => session()->get('status')])
+            </div>
+        @else
+            <div class="pb-10">
+                @include('maelstrom::components.alert', ['message' => 'You can now reset your password below'])
+            </div>
+        @endif
+
+        <form action="{{ route('password.update') }}" method="POST" class="cloak bg-white shadow-md rounded px-8 pt-6 mb-4">
+            @csrf()
+
+            <input type="hidden" name="token" value="{{ $token }}">
+
+            @include('maelstrom::inputs.text', [
+                'name' => 'email',
+                'label' => 'Email Address',
+                'html_type' => 'email',
+                'required' => true,
+                'default' => $email ?? null,
+            ])
+
+            @include('maelstrom::inputs.secret', [
+                'name' => 'password',
+                'label' => 'New Password',
+                'required' => true,
+            ])
+
+            @include('maelstrom::inputs.secret', [
+                'name' => 'password_confirmation',
+                'label' => 'Confirm Password',
+                'required' => true,
+            ])
+
+            <div class="mt-10 flex justify-between items-center">
+                @include('maelstrom::buttons.button', [
+                    'label' => 'Change Password',
+                    'type' => 'primary',
+                ])
+            </div>
+        </form>
+
+        <p class="mt-10 text-center text-gray-500 text-xs">
+            &copy;{{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+        </p>
+
+    </div>
+@endsection
 
 @section('content')
 <div class="container">

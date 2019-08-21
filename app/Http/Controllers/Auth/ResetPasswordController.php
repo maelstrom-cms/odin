@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -30,10 +31,11 @@ class ResetPasswordController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @throws \Exception
      */
     public function __construct()
     {
         $this->middleware('guest');
+        maelstrom(User::class);
     }
 }
