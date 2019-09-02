@@ -104,7 +104,7 @@ trait HasUptime
         }
 
         $upCount = $events->where('was_online', 1);
-        $totalPercentage = ($upCount->count() * 100) / $events->count();
+        $totalPercentage = $upCount->count() ? ($upCount->count() * 100) / $events->count() : 100;
 
         $today = now();
         $lastWeek = now()->subDays(7);
@@ -115,21 +115,21 @@ trait HasUptime
         });
 
         $todayUpEvents = $todayEvents->where('was_online', 1);
-        $todayPercentage = ($todayUpEvents->count() * 100) / $todayEvents->count();
+        $todayPercentage = $todayEvents->count() ? ($todayUpEvents->count() * 100) / $todayEvents->count() : 100;
 
         $weeklyEvents = $events->filter(function ($item) use ($lastWeek, $today) {
             return $item->created_at->isBetween($lastWeek, $today);
         });
 
         $weeklyUpEvents = $weeklyEvents->where('was_online', 1);
-        $weeklyPercentage = ($weeklyUpEvents->count() * 100) / $weeklyEvents->count();
+        $weeklyPercentage = $weeklyEvents->count() ? ($weeklyUpEvents->count() * 100) / $weeklyEvents->count() : 100;
 
         $monthlyEvents = $events->filter(function ($item) use ($lastMonth, $today) {
             return $item->created_at->isBetween($lastMonth, $today);
         });
 
         $monthlyUpEvents = $monthlyEvents->where('was_online', 1);
-        $monthlyPercentage = ($monthlyUpEvents->count() * 100) / $monthlyEvents->count();
+        $monthlyPercentage = $monthlyEvents->count() ? ($monthlyUpEvents->count() * 100) / $monthlyEvents->count() : 100;
 
         return [
             'total' => floor($totalPercentage),

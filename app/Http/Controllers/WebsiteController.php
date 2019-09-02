@@ -104,7 +104,9 @@ class WebsiteController extends Controller
             return $data;
         });
 
-        $this->panel->store('Website Added - Monitoring will start immediately.');
+        $website = $this->panel->store('Website Added - Monitoring will start immediately.');
+
+        $website->runInitialScans();
 
         return $this->panel->redirect('edit');
     }

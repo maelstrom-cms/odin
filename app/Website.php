@@ -2,6 +2,11 @@
 
 namespace App;
 
+use App\Jobs\DnsCheck;
+use App\Jobs\RobotsCheck;
+use App\Jobs\UptimeCheck;
+use App\Jobs\OpenGraphCheck;
+use App\Jobs\CertificateCheck;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,21 +40,45 @@ class Website extends Model
         });
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Runs all the checks for the website.
+     */
+    public function runInitialScans()
+    {
+        CertificateCheck::dispatch($this);
+        DnsCheck::dispatch($this);
+        OpenGraphCheck::dispatch($this);
+        RobotsCheck::dispatch($this);
+        UptimeCheck::dispatch($this);
+    }
+
+    /**
+     * @return string
+     */
     public function getEditLinkAttribute()
     {
         return route('websites.edit', $this->id);
     }
 
+    /**
+     * @return string
+     */
     public function getShowLinkAttribute()
     {
         return route('websites.show', $this->id);
     }
 
+    /**
+     * @param $value
+     */
     public function setUrlAttribute($value)
     {
         $parts = parse_url($value);
