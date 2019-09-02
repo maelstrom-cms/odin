@@ -32,11 +32,10 @@ class Dns
 
         $flat = collect($response['records'])->transform(function ($item) {
             return sprintf(
-                '%s %s %s ttl:%d',
+                '%s %s %s',
                 $item['host'],
                 $item['type'],
                 $item['ip'] ?? $item['target'] ?? $item['mname'] ?? $item['txt'] ?? $item['ipv6'] ?? '',
-                $item['ttl']
             );
         })->sort()->values()->implode("\n");
 
