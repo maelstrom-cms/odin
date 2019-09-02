@@ -1,0 +1,16 @@
+node_modules/**
+.env.example
+.gitattributes
+.gitignore
+.minimage
+babel.config.js
+minimage.json
+package.json
+package-lock.json
+readme.md
+server.php
+tailwind.config.js
+webpack.backend.js
+webpack.frontend.js
+webpack.mix.js
+tests/**

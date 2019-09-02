@@ -28,8 +28,10 @@ class Website extends Model
         parent::boot();
 
         static::addGlobalScope('team', function (Builder $builder) {
-            $user = auth()->user()->id;
-            $builder->where('user_id', $user);
+            if (!app()->runningInConsole()) {
+                $user = auth()->user()->id;
+                $builder->where('user_id', $user);
+            }
         });
     }
 
