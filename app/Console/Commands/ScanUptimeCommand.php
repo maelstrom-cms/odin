@@ -40,7 +40,7 @@ class ScanUptimeCommand extends Command
      */
     public function handle()
     {
-        Website::all()->each(function (Website $website) {
+        Website::where('uptime_enabled', 1)->get()->each(function (Website $website) {
             UptimeCheck::dispatch($website);
             dump('Uptime check queued for ' . $website->url);
         });

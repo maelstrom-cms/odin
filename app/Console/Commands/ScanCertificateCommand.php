@@ -42,7 +42,7 @@ class ScanCertificateCommand extends Command
      */
     public function handle()
     {
-        Website::all()->each(function (Website $website) {
+        Website::where('ssl_enabled', 1)->get()->each(function (Website $website) {
             CertificateCheck::dispatch($website);
             dump('Certificate check queued for ' . $website->url);
         });
