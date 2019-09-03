@@ -53,11 +53,27 @@ class Website extends Model
      */
     public function runInitialScans()
     {
-        CertificateCheck::dispatch($this);
-        DnsCheck::dispatch($this);
-        OpenGraphCheck::dispatch($this);
-        RobotsCheck::dispatch($this);
-        UptimeCheck::dispatch($this);
+        try {
+            OpenGraphCheck::dispatch($this);
+
+            if ($this->ssl_enabled) {
+                CertificateCheck::dispatch($this);
+            }
+
+            if ($this->dns_enabled) {
+                DnsCheck::dispatch($this);
+            }
+
+            if ($this->robots_enabled) {
+                RobotsCheck::dispatch($this);
+            }
+
+            if ($this->uptime_enabled) {
+                UptimeCheck::dispatch($this);
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
+        }
     }
 
     /**
