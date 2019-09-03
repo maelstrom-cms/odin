@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b1dad3ab29716849ec926aa54b130ee",
+    "content-hash": "77b38b0563847dd9e78b2eed78991116",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -1629,6 +1629,56 @@
                 "serialize"
             ],
             "time": "2019-07-09T21:58:11+00:00"
+        },
+        {
+            "name": "owenmelbz/domain-enforcement",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OwenMelbz/domain-enforcement.git",
+                "reference": "7ee6e757f043b428d7ed2ea49bffadec0538e73e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OwenMelbz/domain-enforcement/zipball/7ee6e757f043b428d7ed2ea49bffadec0538e73e",
+                "reference": "7ee6e757f043b428d7ed2ea49bffadec0538e73e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OwenMelbz\\DomainEnforcement\\DomainEnforcementServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OwenMelbz\\DomainEnforcement\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Owen Melbourne",
+                    "email": "owenmelbz@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 middleware to enforce a single domain on your application. e.g non-www. to www.",
+            "keywords": [
+                "enforce",
+                "laravel",
+                "non-www",
+                "redirect",
+                "www"
+            ],
+            "time": "2017-09-02T20:31:11+00:00"
         },
         {
             "name": "paragonie/random_compat",
