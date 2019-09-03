@@ -19,13 +19,11 @@ class WebsiteController extends Controller
     {
         $this->panel = maelstrom(Website::class)
             ->setNameField('url')
-            ->setWithAttributes(['edit_link', 'show_link'])
             ->setTableHeadings([
                 [
-                    'dataIndex' => 'show_link',
-                    'labelIndex' => 'url',
+                    'name' => 'url',
                     'label' => 'Website',
-                    'type' => 'TextLinkColumn',
+                    'type' => 'EditLinkColumn',
                 ],
                 [
                     'name' => 'ssl_enabled',
@@ -51,12 +49,6 @@ class WebsiteController extends Controller
                     'label' => 'Robots',
                     'align' => 'center',
                 ],
-                [
-                    'name' => 'edit_link',
-                    'type' => 'ButtonColumn',
-                    'label' => '',
-                    'align' => 'right',
-                ],
             ]);
     }
 
@@ -77,7 +69,7 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        return $this->panel->create('websites-form');
+        return $this->panel->create('websites-create');
     }
 
     /**
@@ -119,7 +111,9 @@ class WebsiteController extends Controller
      */
     public function show(Website $website)
     {
-        return view('websites-show')->with('website', $website);
+        $this->panel->setEntry($website);
+
+        return $this->panel->redirect('edit');
     }
 
     /**
@@ -132,7 +126,7 @@ class WebsiteController extends Controller
     {
         $this->panel->setEntry($website);
 
-        return $this->panel->edit('websites-form');
+        return $this->panel->edit('websites-show');
     }
 
     /**

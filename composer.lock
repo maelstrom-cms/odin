@@ -1324,16 +1324,16 @@
         },
         {
             "name": "maelstrom-cms/toolkit",
-            "version": "1.0.7",
+            "version": "1.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maelstrom-cms/toolkit.git",
-                "reference": "10cbe50ece50039edd0be65ae81a12ff7c6b7641"
+                "reference": "219b67a0063425fa7f8dc6f08bfe0b18ecc337d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maelstrom-cms/toolkit/zipball/10cbe50ece50039edd0be65ae81a12ff7c6b7641",
-                "reference": "10cbe50ece50039edd0be65ae81a12ff7c6b7641",
+                "url": "https://api.github.com/repos/maelstrom-cms/toolkit/zipball/219b67a0063425fa7f8dc6f08bfe0b18ecc337d6",
+                "reference": "219b67a0063425fa7f8dc6f08bfe0b18ecc337d6",
                 "shasum": ""
             },
             "require": {
@@ -1371,7 +1371,7 @@
                 }
             ],
             "description": "A CMS Toolkit built on Laravel and React",
-            "time": "2019-07-15T17:43:39+00:00"
+            "time": "2019-08-26T19:02:22+00:00"
         },
         {
             "name": "monolog/monolog",

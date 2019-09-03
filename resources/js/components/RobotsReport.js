@@ -22,7 +22,7 @@ export default class RobotsReport extends React.Component {
             loading: true
         });
 
-        let endpoint = window.location.href + '/robots';
+        let endpoint = this.props.endpoint;
 
         if (refresh) {
            endpoint += '?refresh=1';

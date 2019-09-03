@@ -19,9 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::put('edit-account', '\Maelstrom\Http\Controllers\EditAccountController@update');
 
     Route::resource('websites', 'WebsiteController');
-    Route::get('websites/{website}/robots', 'RobotCompareController');
-    Route::get('websites/{website}/uptime', 'UptimeReportController');
-    Route::get('websites/{website}/ssl', 'CertificateReportController');
-    Route::get('websites/{website}/dns', 'DnsCompareController');
-    Route::get('websites/{website}/opengraph', 'OpenGraphController');
+    Route::get('websites/{website}/robots', 'RobotCompareController')->name('robots');
+    Route::get('websites/{website}/uptime', 'UptimeReportController')->name('uptime');
+    Route::get('websites/{website}/ssl', 'CertificateReportController')->name('ssl');
+    Route::get('websites/{website}/dns', 'DnsCompareController')->name('dns');
+    Route::get('websites/{website}/opengraph', 'OpenGraphController')->name('opengraph');
 });

@@ -22,7 +22,7 @@ export default class DnsReport extends React.Component {
             loading: true
         });
 
-        let endpoint = window.location.href + '/dns';
+        let endpoint = this.props.endpoint;
 
         if (refresh) {
             endpoint += '?refresh=1';

@@ -30,7 +30,7 @@ export default class CertificateReport extends React.Component {
             loading: true
         });
 
-        let endpoint = window.location.href + '/ssl';
+        let endpoint = this.props.endpoint;
 
         if (refresh) {
            endpoint += '?refresh=1';

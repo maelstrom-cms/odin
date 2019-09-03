@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "@maelstrom-cms/toolkit": "^1.0.13",
+        "@maelstrom-cms/toolkit": "^1.0.22",
         "axios": "^0.18",
         "bootstrap": "^4.1.0",
         "cross-env": "^5.1",
@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@data-ui/sparkline": "0.0.80",
-        "antd": "^3.21.4",
+        "antd": "^3.23.1",
         "aos": "^2.3.4",
         "chart.js": "^2.8.0",
         "react": "16.8.6",

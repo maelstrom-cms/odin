@@ -32,7 +32,7 @@ export default class UptimeReport extends React.Component {
             loading: true
         });
 
-        let endpoint = window.location.href + '/uptime';
+        let endpoint = this.props.endpoint;
 
         if (refresh) {
             endpoint += '?refresh=1';
