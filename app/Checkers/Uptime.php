@@ -61,10 +61,6 @@ class Uptime
 
     private function notify()
     {
-        return $this->website->user->notify(
-            new WebsiteIsBackUp($this->website)
-        );
-
         $lastTwo = $this->website->uptimes()->orderBy('created_at', 'DESC')->take(2)->get();
 
         if ($lastTwo->count() !== 2) {
