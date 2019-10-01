@@ -30,14 +30,16 @@
                 'required' => true,
             ])
 
-            <div class="mt-10 flex justify-between items-center">
+            <div class="mt-10">
                 @include('maelstrom::buttons.button', [
                     'label' => 'Sign In',
                     'type' => 'primary',
                 ])
-                <div>
-                    <a class="inline-block" style="margin-bottom: 24px;" href="/password/reset">Reset Password</a>
-                </div>
+            </div>
+
+            <div class="mt-10">
+                <a class="inline-block" style="margin-bottom: 24px;" href="/register">Register</a> or
+                <a class="inline-block" style="margin-bottom: 24px;" href="/password/reset">Reset Password</a>
             </div>
         </form>
 

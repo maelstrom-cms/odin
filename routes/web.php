@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::redirect('/', '/websites')->name('home');
     Route::get('edit-account', '\Maelstrom\Http\Controllers\EditAccountController')->name('maelstrom.edit-account');
     Route::put('edit-account', '\Maelstrom\Http\Controllers\EditAccountController@update');
+    Route::post('logout', 'Auth\LoginController@logout')->name('maelstrom.logout');
 
     Route::resource('websites', 'WebsiteController');
     Route::get('websites/{website}/robots', 'RobotCompareController')->name('robots');

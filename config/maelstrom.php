@@ -4,7 +4,7 @@ return [
     /*
      * Displays in the logo area.
      */
-    'title' => 'Odin',
+    'title' => env('APP_NAME'),
 
     /*
      * The root path of your control panel.
@@ -24,14 +24,7 @@ return [
      *
      * e.g. View::share('maelstrom_sidebar', [ ...items ])
      */
-    'sidebar' => [
-        [
-            'id' => 'dashboard',
-            'label' => 'Dashboard',
-            'url' => '/admin',
-            'icon' => 'radar-chart',
-        ]
-    ],
+    'sidebar' => [],
 
     /*
      * "light" or "dark" - This gets passed to ant design where possible.
@@ -42,7 +35,7 @@ return [
      * Where does your asset pipeline output our JS?
      * (relative to the public folder)
      */
-    'core_js_path' => 'js/maelstrom.js',
+    'core_js_path' => '/js/maelstrom.js',
 
     /*
      * Where does your asset pipeline output our CSS?
@@ -83,10 +76,15 @@ return [
         'enabled' => true,
 
         /*
-         * If you need to protect this endpoint at route level
+         * If your using a custom auth guard, you can define it here.
+         */
+        'guard' => 'web',
+
+        /*
+         * If you need to protect this endpoint at route level or anything else
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => ['web', 'auth'],
+        'middleware' => ['web'],
 
         /*
          * We use the current user in "some" places - mostly on the
@@ -110,10 +108,15 @@ return [
         'enabled' => true,
 
         /*
-         * If you need to protect this endpoint at route level
+         * If your using a custom auth guard, you can define it here.
+         */
+        'guard' => 'web',
+
+        /*
+         * If you need to protect this endpoint at route level or anything else
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => ['web', 'auth'],
+        'middleware' => ['web'],
 
         /*
          * These form options will be included in the AJAX endpoint.
@@ -148,10 +151,15 @@ return [
         'enabled' => true,
 
         /*
-         * If you need to protect this endpoint at route level
+         * If your using a custom auth guard, you can define it here.
+         */
+        'guard' => 'web',
+
+        /*
+         * If you need to protect this endpoint at route level or anything else
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => ['web', 'auth'],
+        'middleware' => ['web'],
 
         /*
          * Provide the disk from filesystems.php which will be
@@ -172,6 +180,7 @@ return [
          */
         'mime_types' => [
             'image/svg',
+            'image/svg+xml',
             'image/png',
             'image/jpeg',
             'application/pdf',
