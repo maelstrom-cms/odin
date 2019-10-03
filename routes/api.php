@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('websites/{website}/cron/before', 'CronPingController@before')->name('ping.start');
+Route::get('websites/{website}/cron/after', 'CronPingController@after')->name('ping.stop');

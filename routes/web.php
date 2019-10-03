@@ -25,4 +25,5 @@ Route::middleware('auth')->group(function () {
     Route::get('websites/{website}/ssl', 'CertificateReportController')->name('ssl');
     Route::get('websites/{website}/dns', 'DnsCompareController')->name('dns');
     Route::get('websites/{website}/opengraph', 'OpenGraphController')->name('opengraph');
+    Route::get('websites/{website}/crons', 'CronReportController')->name('crons');
 });

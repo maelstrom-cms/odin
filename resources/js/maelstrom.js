@@ -5,6 +5,7 @@ import DnsReport from './components/DnsReport';
 import RobotsReport from './components/RobotsReport';
 import UptimeReport from './components/UptimeReport';
 import OpenGraph from './components/OpenGraph';
+import CronReport from './components/CronReport';
 import AOS from 'aos';
 
 window.axios = require('axios');
@@ -20,6 +21,7 @@ Registry.register({
     RobotsReport,
     UptimeReport,
     CertificateReport,
+    CronReport,
 });
 
 require('@maelstrom-cms/toolkit');

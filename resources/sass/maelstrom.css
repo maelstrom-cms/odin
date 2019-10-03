@@ -8,3 +8,12 @@
 .ant-input-affix-wrapper .ant-input-prefix {
     left: 9px;
 }
+
+code {
+    margin: 0 1px;
+    padding: .2em .4em;
+    font-size: .9em;
+    background: #f2f4f5;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}

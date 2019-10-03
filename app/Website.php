@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Exception;
 use App\Jobs\DnsCheck;
 use App\Jobs\RobotsCheck;
 use App\Jobs\UptimeCheck;
@@ -9,6 +10,7 @@ use App\Jobs\OpenGraphCheck;
 use App\Jobs\CertificateCheck;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Website extends Model
 {
@@ -17,6 +19,7 @@ class Website extends Model
     use HasCertificates;
     use HasDns;
     use HasOpenGraph;
+    use HasCrons;
 
     protected $fillable = [
         'url',
@@ -26,6 +29,8 @@ class Website extends Model
         'uptime_keyword',
         'robots_enabled',
         'dns_enabled',
+        'cron_enabled',
+        'cron_key',
     ];
 
     protected static function boot()
@@ -33,15 +38,22 @@ class Website extends Model
         parent::boot();
 
         static::addGlobalScope('team', function (Builder $builder) {
-            if (!app()->runningInConsole()) {
-                $user = auth()->user()->id;
-                $builder->where('user_id', $user);
+            $request = request();
+
+            if ($request->filled('key')) {
+                $builder->where('cron_key', $request->input('key'));
+            } elseif (!app()->runningInConsole()) {
+                if (auth()->check()) {
+                    $builder->where('user_id', auth()->id());
+                } else {
+                    $builder->where('user_id', '-1');
+                }
             }
         });
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -71,7 +83,7 @@ class Website extends Model
             if ($this->uptime_enabled) {
                 UptimeCheck::dispatch($this);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             logger($e->getMessage());
         }
     }
