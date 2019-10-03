@@ -34,6 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('scan:dns')->hourly()->withoutOverlapping()->runInBackground();
         $schedule->command('scan:certificate')->dailyAt('08:00:00')->withoutOverlapping()->runInBackground();
         $schedule->command('scan:opengraph')->dailyAt('08:00:00')->withoutOverlapping()->runInBackground();
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
