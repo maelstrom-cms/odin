@@ -1,10 +1,10 @@
-
-
 @include('maelstrom::inputs.text', [
     'name' => 'url',
     'label' => 'Website URL',
     'html_type' => 'url',
     'prefix' => '🔗',
+    'help' => 'Please provide the full website url including protocol e.g. https://www.mywebsite.com',
+    'required' => true,
 ])
 
 <div class="flex flex-wrap justify-between">
