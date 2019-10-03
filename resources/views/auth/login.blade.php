@@ -22,6 +22,7 @@
                 'label' => 'Email Address',
                 'html_type' => 'email',
                 'required' => true,
+                'default' => env('LOGIN_EMAIL'),
             ])
 
             @include('maelstrom::inputs.secret', [
