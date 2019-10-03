@@ -164,10 +164,26 @@ class WebsiteController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Website $website
-     * @return Response
+     * @return void
+     * @throws Exception
      */
     public function destroy(Website $website)
     {
-        //
+        $this->panel->setEntry($website);
+        $this->panel->destroy('Website removed.');
+        Artisan::call('horizon:terminate');
+
+        return $this->panel->redirect('index');
+    }
+
+    /**
+     * @return RedirectResponse|Redirector
+     * @throws Exception
+     */
+    public function bulk()
+    {
+        $this->panel->handleBulkActions();
+
+        return $this->panel->redirect('index');
     }
 }

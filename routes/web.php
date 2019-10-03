@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::put('edit-account', '\Maelstrom\Http\Controllers\EditAccountController@update');
     Route::post('logout', 'Auth\LoginController@logout')->name('maelstrom.logout');
 
+    Route::post('websites/bulk', 'WebsiteController@bulk')->name('websites.bulk');
     Route::resource('websites', 'WebsiteController');
     Route::get('websites/{website}/robots', 'RobotCompareController')->name('robots');
     Route::get('websites/{website}/uptime', 'UptimeReportController')->name('uptime');
