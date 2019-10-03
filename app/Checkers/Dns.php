@@ -2,6 +2,7 @@
 
 namespace App\Checkers;
 
+use Exception;
 use App\DnsScan;
 use App\Website;
 use Whoisdoma\DNSParser\DNSParser;
@@ -28,7 +29,11 @@ class Dns
 
     private function fetch()
     {
-        $response = (new DNSParser('array'))->lookup($this->website->dns_hostname);
+        try {
+            $response = (new DNSParser('array'))->lookup($this->website->dns_hostname);
+        } catch (Exception $e) {
+            return logger()->error($e->getMessage());
+        }
 
         $flat = collect($response['records'])->transform(function ($item) {
             return sprintf(
