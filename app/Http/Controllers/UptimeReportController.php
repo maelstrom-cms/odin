@@ -33,7 +33,6 @@ class UptimeReportController extends Controller
             'events' => $website->recent_events,
         ];
 
-        // return view('debug', ['data' => $response]);
         return response($response);
     }
 }

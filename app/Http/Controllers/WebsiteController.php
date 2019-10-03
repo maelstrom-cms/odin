@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Website;
+use ReflectionException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Maelstrom\Panel;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Artisan;
 
 class WebsiteController extends Controller
 {
@@ -77,7 +82,7 @@ class WebsiteController extends Controller
      *
      * @param Request $request
      * @return Response
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function store(Request $request)
     {
@@ -135,7 +140,7 @@ class WebsiteController extends Controller
      * @param Request $request
      * @param Website $website
      * @return Response
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function update(Request $request, Website $website)
     {

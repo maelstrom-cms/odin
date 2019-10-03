@@ -13,6 +13,7 @@ trait HasDns
     {
         return $this->dns()->orderBy('created_at', 'desc')->take(2)->get();
     }
+
     public function getDnsHostnameAttribute()
     {
         return str_replace('www.', '', parse_url($this->url, PHP_URL_HOST));
