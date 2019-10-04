@@ -37,7 +37,7 @@ Odin is a domain monitoring tool which has the following monitors:
 
 ## Installing
 
-You should be able to follow any (good) up to date Laravel install guide, the gist is as follows:
+You should be able to follow any (good) up to date Laravel install guide, the jist is as follows:
 
 - git clone the repository
 - composer install
