@@ -23,6 +23,18 @@ Odin is a domain monitoring tool which has the following monitors:
 - Basic DNS Monitoring to detect name-server and primary A Records changes
 - Cronjob Schedule Monitoring - Ping the API before and after your jobs run to check they're running on schedule.
 
+## Notifications Fired
+
+- CertificateHasExpired
+- CertificateIsExpiring
+- CertificateIsInvalid
+- CertificateIsWeak
+- CertificateWillExpire
+- DnsHasChanged
+- RobotsHasChanged
+- WebsiteIsBackUp
+- WebsiteIsDown
+
 ## Installing
 
 You should be able to follow any (good) up to date Laravel install guide, the gist is as follows:
@@ -63,15 +75,3 @@ Deploying the project is very similar to installing it, the steps will differ de
 
 ### Viewing a report/monitor
 ![report](https://user-images.githubusercontent.com/1094740/66187515-d5465400-e67c-11e9-9a37-081b841ae11c.png)
-
-## Notifications Fired
-
-- CertificateHasExpired
-- CertificateIsExpiring
-- CertificateIsInvalid
-- CertificateIsWeak
-- CertificateWillExpire
-- DnsHasChanged
-- RobotsHasChanged
-- WebsiteIsBackUp
-- WebsiteIsDown
