@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Spin, Progress, Icon, Table, Tag } from 'antd';
-import { Line } from 'react-chartjs-2''
+import { Line } from 'react-chartjs-2';
 import { formatDateTime, GREEN, YELLOW, RED, NoData } from '../helpers';
 
 export default class UptimeReport extends React.Component {
