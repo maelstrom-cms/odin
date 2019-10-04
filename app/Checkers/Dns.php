@@ -40,7 +40,7 @@ class Dns
                 '%s %s %s',
                 $item['host'],
                 $item['type'],
-                $item['ip'] ?? $item['target'] ?? $item['mname'] ?? $item['txt'] ?? $item['ipv6'] ?? '',
+                ($item['ip'] ?? $item['target'] ?? $item['mname'] ?? $item['txt'] ?? $item['ipv6'] ?? '')
             );
         })->sort()->values()->implode("\n");
 
