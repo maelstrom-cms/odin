@@ -100,7 +100,7 @@ class WebsiteController extends Controller
             'uptime_enabled' => 'boolean',
             'uptime_keyword' => 'required_if:uptime_enabled,1',
             'cron_enabled' => 'boolean',
-            'cron_keyword' => 'required_if:cron_enabled,1',
+            'cron_key' => 'required_if:cron_enabled,1',
         ]);
 
         $this->panel->beforeSave(function ($data) use ($request) {
@@ -160,7 +160,7 @@ class WebsiteController extends Controller
             'uptime_enabled' => 'boolean',
             'uptime_keyword' => 'required_if:uptime_enabled,1',
             'cron_enabled' => 'boolean',
-            'cron_keyword' => 'required_if:cron_enabled,1',
+            'cron_key' => 'required_if:cron_enabled,1',
         ]);
 
         $this->panel->setEntry($website);
