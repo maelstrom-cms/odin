@@ -63,3 +63,15 @@ Deploying the project is very similar to installing it, the steps will differ de
 
 ### Viewing a report/monitor
 ![report](https://user-images.githubusercontent.com/1094740/66187515-d5465400-e67c-11e9-9a37-081b841ae11c.png)
+
+## Notifications Fired
+
+- CertificateHasExpired
+- CertificateIsExpiring
+- CertificateIsInvalid
+- CertificateIsWeak
+- CertificateWillExpire
+- DnsHasChanged
+- RobotsHasChanged
+- WebsiteIsBackUp
+- WebsiteIsDown
