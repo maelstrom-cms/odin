@@ -47,10 +47,10 @@ Deploying the project is very similar to installing it, the steps will differ de
 ### Logging in
 ![login](https://user-images.githubusercontent.com/1094740/66187512-d5465400-e67c-11e9-9c2e-8b81e58ec73a.png)
 
-### Editing your profile
+### Editing your profile
 ![profile](https://user-images.githubusercontent.com/1094740/66187513-d5465400-e67c-11e9-9a54-133c4e270eb2.png)
 
-### Creating a monitor
+### Creating a monitor
 ![create](https://user-images.githubusercontent.com/1094740/66187508-d4adbd80-e67c-11e9-922b-501156069934.png)
 
 ### Editing a monitor
