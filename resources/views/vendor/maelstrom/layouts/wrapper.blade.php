@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>@yield('title') :: {{ config('maelstrom.title_prefix', config('maelstrom.title')) }}</title>
