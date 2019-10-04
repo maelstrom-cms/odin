@@ -8,6 +8,8 @@ It is not a final release - it's an in-house tool which we use to provide basic 
 
 We're simply open-sourcing it to allow others that might find it useful to use to use, we don't provide any support SLAs, however if bugs are found we'll investigate when we can, and if there's feature requests we'll consider. Pull Requests for new features/bug fixes are welcome, however we recommend opening an issue and discussing them before spending time doing it.
 
+Theres no automated testing, and most likely won't work for anything less than PHP 7.3 - We run on nginx but would work on apache 2.4+
+
 ## What is it?
 
 Odin is a domain monitoring tool which has the following monitors:
