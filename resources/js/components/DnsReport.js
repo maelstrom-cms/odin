@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Button, Spin } from 'antd';
-import ReactDiffViewer from 'react-diff-viewer'
-import { formatDateTime } from "../helpers";
-import { NoData } from '../helpers'
+import ReactDiffViewer from 'react-diff-viewer';
+import { formatDateTime } from '../helpers';
+import { NoData } from '../helpers';
 
 export default class DnsReport extends React.Component {
 
