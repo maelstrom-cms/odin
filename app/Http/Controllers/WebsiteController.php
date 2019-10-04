@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Website;
+use Maelstrom\Panel;
 use ReflectionException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Maelstrom\Panel;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
@@ -180,7 +180,9 @@ class WebsiteController extends Controller
     public function destroy(Website $website)
     {
         $this->panel->setEntry($website);
+        
         $this->panel->destroy('Website removed.');
+        
         Artisan::call('horizon:terminate');
 
         return $this->panel->redirect('index');
