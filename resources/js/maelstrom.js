@@ -1,4 +1,4 @@
-import Registry from '@maelstrom-cms/toolkit/js/support/Registry'
+import Registry from '@maelstrom-cms/toolkit/js/support/Registry';
 import ButtonColumn from './components/ButtonColumn';
 import CertificateReport from './components/CertificateReport';
 import DnsReport from './components/DnsReport';
