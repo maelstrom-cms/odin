@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card, Button, Spin } from 'antd';
 import ReactDiffViewer from 'react-diff-viewer'
-import { formatDateTime } from "../helpers";
-import { NoData } from '../helpers'
+import { formatDateTime, NoData } from '../helpers';
 
 export default class RobotsReport extends React.Component {
 
