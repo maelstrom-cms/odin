@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button, Spin, Progress, Icon, Tree, Tag, notification } from 'antd';
-import {formatDateTime, GREEN, RED, YELLOW} from "../helpers";
-import { NoData } from '../helpers'
+import { formatDateTime, GREEN, RED, YELLOW } from '../helpers';
+import { NoData } from '../helpers';
 
 const TreeNode = Tree.TreeNode;
 
