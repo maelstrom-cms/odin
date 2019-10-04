@@ -54,6 +54,12 @@ class WebsiteController extends Controller
                     'label' => 'Robots',
                     'align' => 'center',
                 ],
+                [
+                    'name' => 'cron_enabled',
+                    'type' => 'BooleanColumn',
+                    'label' => 'Crons',
+                    'align' => 'center',
+                ],
             ]);
     }
 
