@@ -39,7 +39,10 @@
             </div>
 
             <div class="mt-10">
-                <a class="inline-block" style="margin-bottom: 24px;" href="/register">Register</a> or
+                @if (config('auth.misc.users.allow_registration'))
+                    <a class="inline-block" style="margin-bottom: 24px;" href="/register">Register</a>
+                    or
+                @endif
                 <a class="inline-block" style="margin-bottom: 24px;" href="/password/reset">Reset Password</a>
             </div>
         </form>
