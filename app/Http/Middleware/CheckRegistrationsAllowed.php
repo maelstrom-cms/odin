@@ -16,7 +16,7 @@ class CheckRegistrationsAllowed
      */
     public function handle($request, Closure $next)
     {
-        if (!config('auth.misc.users.allow_registration')) {
+        if (!config('auth.allow_registration')) {
             abort(404);
         }
 

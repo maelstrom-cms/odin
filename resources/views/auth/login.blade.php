@@ -39,7 +39,7 @@
             </div>
 
             <div class="mt-10">
-                @if (config('auth.misc.users.allow_registration'))
+                @if (config('auth.allow_registration'))
                     <a class="inline-block" style="margin-bottom: 24px;" href="/register">Register</a>
                     or
                 @endif

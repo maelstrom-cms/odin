@@ -105,14 +105,9 @@ return [
     | Misc Settings
     |--------------------------------------------------------------------------
     |
-    | Some misc settings.
-    |  - Toggle user registration.
+    |  - Toggle user registration
     |
     */
 
-    'misc' => [
-        'users' => [
-            'allow_registration' => env('ALLOW_REGISTRATION', true),
-        ]
-    ]
+    'allow_registration' => env('ALLOW_REGISTRATION', true),
 ];
