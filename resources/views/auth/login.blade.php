@@ -22,7 +22,7 @@
                 'label' => 'Email Address',
                 'html_type' => 'email',
                 'required' => true,
-                'default' => env('LOGIN_EMAIL'),
+                'default' => config('odin.login_email'),
             ])
 
             @include('maelstrom::inputs.secret', [
