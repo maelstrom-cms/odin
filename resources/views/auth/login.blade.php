@@ -39,8 +39,10 @@
             </div>
 
             <div class="mt-10">
-                <a class="inline-block" style="margin-bottom: 24px;" href="/register">Register</a> or
-                <a class="inline-block" style="margin-bottom: 24px;" href="/password/reset">Reset Password</a>
+                @if (Route::has('register'))
+                <a class="inline-block" style="margin-bottom: 24px;" href="{{ route('register') }}">Register</a> or
+                @endif
+                <a class="inline-block" style="margin-bottom: 24px;" href="{{ route('password.request') }}">Reset Password</a>
             </div>
         </form>
 
