@@ -8,7 +8,34 @@ trait HasUptime
 {
     public function uptimes()
     {
-        return $this->hasMany(UptimeScan::class)->orderBy('created_at', 'desc');
+        return $this->hasMany(UptimeScan::class)
+            ->where('created_at', '<', now()->addDays(31))
+            ->orderBy('created_at', 'desc');
+    }
+
+    public function generateUptimeReport($refreshCache = false)
+    {
+        if ($refreshCache) {
+            cache()->forget($this->cache_key);
+            $this->load(['uptimes']);
+        }
+
+        return cache()->rememberForever($this->cache_key, function () {
+            return [
+                'uptime' => $this->uptime_summary,
+                'response_time' => $this->response_time,
+                'response_times' => $this->response_times,
+                'online' => $this->current_state,
+                'online_time' => $this->uptime,
+                'last_incident' => $this->last_incident,
+                'events' => $this->recent_events,
+            ];
+        });
+    }
+
+    public function getCacheKeyAttribute()
+    {
+        return 'uptime_' . $this->getKey();
     }
 
     public function getLastIncidentAttribute()

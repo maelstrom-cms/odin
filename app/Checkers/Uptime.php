@@ -23,6 +23,7 @@ class Uptime
     {
         $this->fetch();
         $this->notify();
+        $this->cache();
     }
 
     private function fetch()
@@ -85,5 +86,10 @@ class Uptime
                 new WebsiteIsDown($this->website)
             );
         }
+    }
+
+    private function cache()
+    {
+        $this->website->generateUptimeReport(true);
     }
 }
