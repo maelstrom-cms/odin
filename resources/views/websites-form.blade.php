@@ -57,6 +57,7 @@
     'charset' => 'qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM',
 ])
 
+@if($entry)
 <div id="cron_info_field" class="cloak">
     <p>
         When your scheduled task starts, you should ping:
@@ -73,3 +74,8 @@
         <pre><code>{{ route('ping.stop', ['website' => $entry, 'task' => 'Optimise-Images']) }}</code></pre>
     </p>
 </div>
+@else
+    <div id="cron_info_field" class="cloak">
+        <p>Once you've "Saved" this website, we'll provide you with your ping endpoints.</p>
+    </div>
+@endif
