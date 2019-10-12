@@ -82,7 +82,6 @@ return [
 
     'waits' => [
         'redis:default' => 60,
-        'redis:long' => 3600,
     ],
 
     /*
@@ -153,7 +152,7 @@ return [
             ],
             'supervisor-2' => [
                 'connection' => 'redis',
-                'queue' => ['long'],
+                'queue' => ['redis-long'],
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 1,
