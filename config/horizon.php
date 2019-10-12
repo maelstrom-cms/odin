@@ -82,6 +82,7 @@ return [
 
     'waits' => [
         'redis:default' => 60,
+        'redis:long' => 3600,
     ],
 
     /*
@@ -149,6 +150,14 @@ return [
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 1,
+            ],
+            'supervisor-2' => [
+                'connection' => 'redis',
+                'queue' => ['long'],
+                'balance' => 'simple',
+                'processes' => 10,
+                'tries' => 1,
+                'timeout' => 3600,
             ],
         ],
 

@@ -33,6 +33,6 @@ class CrawlSiteCommand extends Command
 
         PageCheck::dispatchNow(
             Website::findOrFail($websiteId)
-        );
+        )->onQueue('redis-long');
     }
 }
