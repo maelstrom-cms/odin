@@ -56,7 +56,7 @@ class ProblematicPageController extends Controller
     {
         PageCheck::dispatch(
             $website
-        )->onQueue('redis-long');
+        )->onConnection('redis-long');
 
         return response([
             'success' => true,
