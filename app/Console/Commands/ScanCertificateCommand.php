@@ -23,17 +23,7 @@ class ScanCertificateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Runs the SSL checks for all enabled websites.';
 
     /**
      * Execute the console command.

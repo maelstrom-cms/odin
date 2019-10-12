@@ -21,17 +21,7 @@ class ScanUptimeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Creates an uptime checkpoint for all enabled websites.';
 
     /**
      * Execute the console command.

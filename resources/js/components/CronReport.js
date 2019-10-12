@@ -18,7 +18,7 @@ export default class CronReport extends React.Component {
         this.update();
     }
 
-    update = async(refresh = false) => {
+    update = async () => {
         await this.setState({
             loading: true
         });
@@ -36,15 +36,11 @@ export default class CronReport extends React.Component {
         });
     };
 
-    forceUpdate = () => {
-        return this.update(true);
-    };
-
     renderFilter() {
         return (
             <>
                 <span className="mr-1">Showing <InputNumber min={ 1 } max={ this.state.total } defaultValue={ this.state.limit } value={ this.state.limit } onChange={ limit => this.setState({ limit })} /> of { this.state.total }</span>
-                <Button loading={ this.state.loading } onClick={ this.forceUpdate }>Refresh</Button>
+                <Button loading={ this.state.loading } onClick={ this.update }>Refresh</Button>
             </>
         )
     }
@@ -91,13 +87,9 @@ export default class CronReport extends React.Component {
     };
 
     renderBusy = () => {
-        const { now, previous } = this.state;
-
-        if (now && previous) {
-            return this.renderReport()
-        }
-
-        return <Spin />
+        return <div className="p-6">
+            <Spin />
+        </div>
     };
 
     render() {

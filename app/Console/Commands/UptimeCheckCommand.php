@@ -20,17 +20,7 @@ class UptimeCheckCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Adds an uptime checkpoint for a single website.';
 
     /**
      * Execute the console command.

@@ -31,47 +31,31 @@ class Uptime
         $client = new Client();
 
         $response_time = 3001;
-<<<<<<< HEAD
-
-        $response = $client->request('GET', $this->website->url, [
-            RequestOptions::ON_STATS => function ($stats) use (&$response_time) {
-                $response_time = $stats->getTransferTime();
-            },
-            RequestOptions::VERIFY => false,
-            RequestOptions::ALLOW_REDIRECTS => true,
-            RequestOptions::HEADERS => [
-                'User-Agent' => config('app.user_agent'),
-            ],
-        ]);
-
-        $keywordFound = Str::contains($response->getBody(), $this->website->uptime_keyword);
-=======
         $keywordFound = false;
 
-       try {
-           $response = $client->request('GET', $this->website->url, [
-               'on_stats' => function ($stats) use (&$response_time) {
-                   $response_time = $stats->getTransferTime();
-               },
-               'http_errors' => false,
-               'verify' => false,
-               'allow_redirects' => true,
-               'headers' => [
-                   'User-Agent' => 'Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/; Odin)'
-               ],
-           ]);
+        try {
+            $response = $client->request('GET', $this->website->url, [
+                RequestOptions::ON_STATS => function ($stats) use (&$response_time) {
+                    $response_time = $stats->getTransferTime();
+                },
+                RequestOptions::HTTP_ERRORS => false,
+                RequestOptions::VERIFY => false,
+                RequestOptions::ALLOW_REDIRECTS => true,
+                RequestOptions::HEADERS => [
+                    'User-Agent' => config('app.user_agent'),
+                ],
+            ]);
 
-           $keywordFound = Str::contains($response->getBody(), $this->website->uptime_keyword);
->>>>>>> master
+            $keywordFound = Str::contains($response->getBody(), $this->website->uptime_keyword);
 
-        if (!$keywordFound && $response->getStatusCode() == '200') {
-               $reason = sprintf('Keyword: %s not found (%d)', $this->website->uptime_keyword, 200);
-           } else {
-               $reason = sprintf('%s (%d)', $response->getReasonPhrase(), $response->getStatusCode());
-           }
-       } catch (\Exception $exception) {
-           $reason = $exception->getMessage();
-       }
+            if (!$keywordFound && $response->isSuccessful()) {
+                $reason = sprintf('Keyword: %s not found (%d)', $this->website->uptime_keyword, 200);
+            } else {
+                $reason = sprintf('%s (%d)', $response->getReasonPhrase(), $response->getStatusCode());
+            }
+        } catch (\Exception $exception) {
+            $reason = $exception->getMessage();
+        }
 
         $scan = new UptimeScan([
             'response_status' => $reason,

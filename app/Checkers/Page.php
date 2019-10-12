@@ -3,14 +3,11 @@
 namespace App\Checkers;
 
 use Exception;
-use App\DnsScan;
 use App\Website;
-use App\CrawlObserver;
 use Spatie\Crawler\Crawler;
+use App\Crawler\CrawlProfile;
 use GuzzleHttp\RequestOptions;
-use Whoisdoma\DNSParser\DNSParser;
-use SebastianBergmann\Diff\Differ;
-use App\Notifications\DnsHasChanged;
+use App\Crawler\CrawlObserver;
 
 class Page
 {
@@ -24,35 +21,30 @@ class Page
     public function run()
     {
         $this->fetch();
-        $this->compare();
-        $this->notify();
     }
 
     private function fetch()
     {
-        Crawler::create([
-            RequestOptions::COOKIES => true,
-            RequestOptions::CONNECT_TIMEOUT => 10,
-            RequestOptions::TIMEOUT => 10,
-            RequestOptions::ALLOW_REDIRECTS => false,
-            RequestOptions::HEADERS => [
-                'User-Agent' => '',
-            ],
-        ])
-            ->ignoreRobots()
-            ->setConcurrency(2)
-            ->executeJavaScript()
-            ->setCrawlObserver(new CrawlObserver($this->website))
-            ->startCrawling($this->website->url);
-    }
-
-    private function compare()
-    {
-
-    }
-
-    private function notify()
-    {
-
+        try {
+            Crawler::create([
+                RequestOptions::COOKIES => true,
+                RequestOptions::CONNECT_TIMEOUT => 30,
+                RequestOptions::TIMEOUT => 30,
+                RequestOptions::HTTP_ERRORS => false,
+                RequestOptions::VERIFY => false,
+                RequestOptions::ALLOW_REDIRECTS => true,
+                RequestOptions::HEADERS => [
+                    'User-Agent' => config('app.user_agent'),
+                ],
+            ])
+                ->ignoreRobots()
+                ->setDelayBetweenRequests(1000)
+                ->setConcurrency(3)
+                ->setCrawlObserver(new CrawlObserver($this->website))
+                ->setCrawlProfile(new CrawlProfile($this->website))
+                ->startCrawling($this->website->url);
+        } catch (Exception $exception) {
+            logger()->error($exception->getMessage());
+        }
     }
 }

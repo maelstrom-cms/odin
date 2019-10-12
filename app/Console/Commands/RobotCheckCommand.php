@@ -20,17 +20,7 @@ class RobotCheckCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Checks the robots.txt for a website.';
 
     /**
      * Execute the console command.

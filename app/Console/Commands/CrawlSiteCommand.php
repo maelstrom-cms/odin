@@ -20,17 +20,7 @@ class CrawlSiteCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Crawls a website and collects all the linked URLs';
 
     /**
      * Execute the console command.

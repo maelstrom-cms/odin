@@ -24,17 +24,7 @@ class ScanEverythingCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Runs every checker for every website.';
 
     /**
      * Execute the console command.

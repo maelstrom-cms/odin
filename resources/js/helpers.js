@@ -10,3 +10,16 @@ export const NoData = () => <> <div className="ant-empty ant-empty-normal"> <div
 export const GREEN = '#72c040';
 export const YELLOW = '#efaf41';
 export const RED = '#e23c39';
+
+export const truncate = (string, length = 60) => {
+    if (string.length > length && string.length > 0) {
+        let new_str = string + ' ';
+        new_str = string.substr(0, length);
+        new_str = string.substr(0, new_str.lastIndexOf(' '));
+        new_str = (new_str.length > 0) ? new_str : string.substr(0, length);
+
+        return new_str + '...';
+    }
+
+    return string;
+};

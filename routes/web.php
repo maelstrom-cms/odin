@@ -25,4 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('websites/{website}/dns', 'DnsCompareController')->name('dns');
     Route::get('websites/{website}/opengraph', 'OpenGraphController')->name('opengraph');
     Route::get('websites/{website}/crons', 'CronReportController')->name('crons');
+    Route::get('websites/{website}/problems', 'ProblematicPageController')->name('problems');
+    Route::get('websites/{website}/problems/scan', 'ProblematicPageController@scan')->name('problems.scan');
+    Route::delete('websites/{website}/problems/{page}/delete', 'ProblematicPageController@delete')->name('problems.delete');
 });
