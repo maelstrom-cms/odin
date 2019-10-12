@@ -50,9 +50,27 @@ You can then visit the webpage and /register to create an account.
 
 By default the Jobs are able to be queued and executed by a queue worker/horizon - We use horizon, but you can configure/protect this however you need.
 
+## Using the Crawler
+
+We use a modified version of the `spatie/browsershot` package which provides the crawling functionality, if you're unable to install puppeteer on your server, then you cannot use this feature.
+
+Quick install for puppeteer:
+
+macOS: `npm install puppeteer --global`
+
+Ubuntu 16:
+```
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+sudo npm install --global --unsafe-perm puppeteer
+sudo chmod -R o+rx /usr/lib/node_modules/puppeteer/.local-chromium
+```
+
+You can read more about this: https://github.com/spatie/browsershot#requirements
+
 ## Deploying
 
-Deploying the project is very similar to installing it, the steps will differ depending on your hosting environment, theres plenty of tutorials online about how to deploy onto various platforms: https://www.google.com/search?q=how+to+deploy+laravel%20project
+Deploying the project is very similar to installing it, the steps will differ depending on your hosting environment, there's plenty of tutorials online about how to deploy onto various platforms: https://www.google.com/search?q=how+to+deploy+laravel%20project
 
 ## Screenshots
 
