@@ -6,7 +6,7 @@ use App\Website;
 use App\UptimeScan;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
-use SebastianBergmann\Diff\Differ;
+use GuzzleHttp\RequestOptions;
 use App\Notifications\WebsiteIsDown;
 use App\Notifications\WebsiteIsBackUp;
 
@@ -32,13 +32,13 @@ class Uptime
         $response_time = 3001;
 
         $response = $client->request('GET', $this->website->url, [
-            'on_stats' => function ($stats) use (&$response_time) {
+            RequestOptions::ON_STATS => function ($stats) use (&$response_time) {
                 $response_time = $stats->getTransferTime();
             },
-            'verify' => false,
-            'allow_redirects' => true,
-            'headers' => [
-                'User-Agent' => 'Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/; Odin)'
+            RequestOptions::VERIFY => false,
+            RequestOptions::ALLOW_REDIRECTS => true,
+            RequestOptions::HEADERS => [
+                'User-Agent' => config('app.user_agent'),
             ],
         ]);
 

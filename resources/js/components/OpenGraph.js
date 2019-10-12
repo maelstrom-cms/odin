@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Spin } from 'antd';
+import { Card, Button, Spin, Alert } from 'antd';
 import { NoData } from '../helpers'
 
 export default class RobotsReport extends React.Component {
@@ -12,6 +12,8 @@ export default class RobotsReport extends React.Component {
         description: '',
         url: '',
         image: '',
+        image_width: null,
+        image_height: null,
     };
 
     componentDidMount() {
@@ -45,8 +47,15 @@ export default class RobotsReport extends React.Component {
         return this.update(true);
     };
 
+    analyiseAssets = ({ target }) => {
+        this.setState({
+            image_width: target.naturalWidth,
+            image_height: target.naturalHeight,
+        })
+    };
+
     renderReport = () => {
-        const { title, description, image, url } = this.state;
+        const { title, image } = this.state;
 
         if (!title) {
             return <NoData />
@@ -55,14 +64,60 @@ export default class RobotsReport extends React.Component {
         return (
             <div className="flex flex-wrap items-center">
                 <div className="w-1/2 pr-8">
-                    { image ? <img className="w-full h-auto shadow-lg" src={ image } alt={ title } /> : <p>No image fround.</p>}
+                    { image ? this.renderImage() : <p>No image fround.</p> }
                 </div>
                 <div className="w-1/2">
-                    <h2>{ title || 'No title found.' }</h2>
-                    <p>{ description || 'No description found.' }</p>
-                    { url ? <a href={ url } rel="noreferrer noopener" target="_blank"><small>{ url }</small></a> : <p>No URL found.</p>}
+                    { this.renderTexts() }
                 </div>
             </div>
+        )
+    };
+
+    renderImage = () => {
+        const { title, image, image_height, image_width } = this.state;
+
+        const warning = function() {
+            if (image_height !== 630 || image_width !== 1200) {
+                return <Alert className="mt-4" showIcon={ true } type="warning" message={`Image dimensions should be: 1200x630 - But provided image was ${image_width}x${image_height}`} />
+            }
+        };
+
+        return <>
+            <img className="max-w-full h-auto shadow-lg" onLoad={ this.analyiseAssets } src={ image } alt={ title } />
+            { !!image_height && warning() }
+        </>
+    };
+
+    renderTexts = () => {
+        const { title, description, url } = this.state;
+
+        const warning = function() {
+            const messages = [];
+
+            if (title.length < 50 || title.length > 60) {
+                messages.push(`The page title is ${title.length} characters long - However the recommended length is between 50 and 60 characters.`);
+            }
+
+            if (description.length < 100 || description.length > 160) {
+                messages.push(`The page description is ${description.length} characters long - However the recommended length is between 100 and 160 characters.`);
+            }
+
+            if (!messages.length) {
+                return null;
+            }
+
+            return <Alert className="mt-4" showIcon={ true } type="warning" message={
+                messages.map((message, k) => <p className={k ? 'mt-2 mb-0' : 'my-0'} key={ k }>{ message }</p>)
+            } />
+        };
+
+        return (
+            <>
+                <h2>{ title || 'No title found.' }</h2>
+                <p>{ description || 'No description found.' }</p>
+                { url ? <a href={ url } rel="noreferrer noopener" target="_blank"><small>{ url }</small></a> : <p>No URL found.</p>}
+                { warning() }
+            </>
         )
     };
 

@@ -8,18 +8,19 @@ use App\Jobs\RobotsCheck;
 use App\Jobs\UptimeCheck;
 use App\Jobs\OpenGraphCheck;
 use App\Jobs\CertificateCheck;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Website extends Model
 {
+    use HasDns;
+    use HasCrons;
     use HasUptime;
     use HasRobots;
-    use HasCertificates;
-    use HasDns;
     use HasOpenGraph;
-    use HasCrons;
+    use HasCertificates;
+    use HasCrawledPages;
 
     protected $fillable = [
         'url',
@@ -30,6 +31,7 @@ class Website extends Model
         'robots_enabled',
         'dns_enabled',
         'cron_enabled',
+        'crawler_enabled',
         'cron_key',
     ];
 

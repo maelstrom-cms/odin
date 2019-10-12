@@ -2,6 +2,8 @@
 
 return [
 
+    'user_agent' => env('USER_AGENT', 'Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/; Odin)'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

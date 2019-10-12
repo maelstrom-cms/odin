@@ -1,12 +1,9 @@
 <?php
 
-
 namespace App;
-
 
 trait HasRobots
 {
-
     public function robots()
     {
         return $this->hasMany(RobotScan::class);

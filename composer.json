@@ -20,6 +20,7 @@
         "owenmelbz/domain-enforcement": "^0.0.6",
         "predis/predis": "^1.1",
         "sebastian/diff": "^3.0",
+        "spatie/crawler": "^4.6",
         "spatie/ssl-certificate": "^1.15",
         "visualappeal/php-ssllabs-api": "^1.0",
         "whoisdoma/dnsparser": "dev-master",

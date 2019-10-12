@@ -180,9 +180,9 @@ class WebsiteController extends Controller
     public function destroy(Website $website)
     {
         $this->panel->setEntry($website);
-        
+
         $this->panel->destroy('Website removed.');
-        
+
         Artisan::call('horizon:terminate');
 
         return $this->panel->redirect('index');
