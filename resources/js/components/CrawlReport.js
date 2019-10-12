@@ -121,7 +121,7 @@ export default class CrawlReport extends React.Component {
         const { count, pages, loading } = this.state;
 
         return <div className="flex items-center">
-            <span>Showing { count } pages of { pages.length } crawled.</span>
+            <span>Showing { pages.length } pages of { count } crawled.</span>
             <Button onClick={ this.reCrawl } loading={ loading } className="ml-2">Request Crawl</Button>
             <Button onClick={ this.forceUpdate } loading={ loading } className="ml-4" shape="circle" icon="sync" size="small" type="primary" />
         </div>
