@@ -43,7 +43,7 @@ class PageCheck implements ShouldQueue
      */
     public function handle()
     {
-//        $checker = new Page($this->website);
-//        $checker->run();
+        $checker = new Page($this->website);
+        $checker->run();
     }
 }

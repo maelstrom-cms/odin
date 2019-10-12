@@ -72,6 +72,7 @@ return [
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 3600,
             'block_for' => null,
+            'timeout' => 3600,
         ],
 
     ],
