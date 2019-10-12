@@ -151,8 +151,8 @@ return [
                 'tries' => 1,
             ],
             'supervisor-2' => [
-                'connection' => 'redis',
-                'queue' => ['redis-long'],
+                'connection' => 'redis-long',
+                'queue' => ['default_long'],
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 1,
