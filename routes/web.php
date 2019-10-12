@@ -11,8 +11,6 @@
 |
 */
 
-Auth::routes();
-
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/websites')->name('home');
     Route::get('edit-account', '\Maelstrom\Http\Controllers\EditAccountController')->name('maelstrom.edit-account');

@@ -3,6 +3,11 @@
 return [
 
     /*
+     * You can disable the registration of the /register routes here.
+     */
+    'registrations_enabled' => env('REGISTRATIONS_ENABLED', true),
+
+    /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
     |--------------------------------------------------------------------------

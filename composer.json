@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.1.3",
         "doctrine/annotations": "^1.7",
+        "doctrine/dbal": "^2.9",
         "embed/embed": "^3.4",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -40,6 +41,12 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/OwenMelbz/DNSParser"
+        }
+    ],
     "extra": {
         "laravel": {
             "dont-discover": []
