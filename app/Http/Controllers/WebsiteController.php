@@ -60,6 +60,12 @@ class WebsiteController extends Controller
                     'label' => 'Crons',
                     'align' => 'center',
                 ],
+                [
+                    'name' => 'crawler_enabled',
+                    'type' => 'BooleanColumn',
+                    'label' => 'Crawler',
+                    'align' => 'center',
+                ],
             ]);
     }
 

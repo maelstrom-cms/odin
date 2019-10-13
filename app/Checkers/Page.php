@@ -38,7 +38,7 @@ class Page
                 ],
             ])
                 ->ignoreRobots()
-                ->executeJavaScript()
+//                ->executeJavaScript()
                 ->setDelayBetweenRequests(1000)
                 ->setConcurrency(3)
                 ->setCrawlObserver(new CrawlObserver($this->website))
