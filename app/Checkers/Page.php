@@ -5,9 +5,9 @@ namespace App\Checkers;
 use Exception;
 use App\Website;
 use Spatie\Crawler\Crawler;
-use App\Crawler\CrawlProfile;
 use GuzzleHttp\RequestOptions;
 use App\Crawler\CrawlObserver;
+use Spatie\Crawler\CrawlInternalUrls;
 
 class Page
 {
@@ -42,7 +42,7 @@ class Page
                 ->setDelayBetweenRequests(1000)
                 ->setConcurrency(3)
                 ->setCrawlObserver(new CrawlObserver($this->website))
-                ->setCrawlProfile(new CrawlProfile($this->website))
+                ->setCrawlProfile(new CrawlInternalUrls($this->website->url))
                 ->startCrawling($this->website->url);
         } catch (Exception $exception) {
             logger()->error($exception->getMessage());
