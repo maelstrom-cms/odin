@@ -2,12 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\CrawledPage;
-use App\Jobs\CertificateCheck;
-use App\Jobs\DnsCheck;
 use App\Website;
+use App\Jobs\PageCheck;
 use Illuminate\Console\Command;
-use App\Jobs\BrowserConsoleCheck;
 
 class ScanConsoleCommand extends Command
 {
@@ -32,11 +29,8 @@ class ScanConsoleCommand extends Command
      */
     public function handle()
     {
-        Website::with('crawledPages')->where('crawler_enabled', 1)->get()->each(function (Website $website) {
-            $website->crawledPages->each(function (CrawledPage $page) {
-                BrowserConsoleCheck::dispatch($page);
-                dump('console error check queued for ' . $page->url);
-            });
+        Website::where('crawler_enabled', 1)->get()->each(function (Website $website) {
+            PageCheck::dispatch($website);
         });
     }
 }

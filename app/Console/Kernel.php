@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
@@ -34,6 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('scan:dns')->hourly()->withoutOverlapping()->runInBackground();
         $schedule->command('scan:certificate')->dailyAt('08:00:00')->withoutOverlapping()->runInBackground();
         $schedule->command('scan:opengraph')->dailyAt('08:00:00')->withoutOverlapping()->runInBackground();
+        $schedule->command('scan:consoles')->daily()->withoutOverlapping();
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 

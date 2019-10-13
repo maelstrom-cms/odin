@@ -16,12 +16,6 @@ class PageCheck implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Job might run for a while, we'll say 1 hour max.
-     * @var int
-     */
-    public $timeout = 3600;
-
-    /**
      * @var Website
      */
     private $website;
@@ -34,6 +28,7 @@ class PageCheck implements ShouldQueue
     public function __construct(Website $website)
     {
         $this->website = $website;
+        $this->onQueue('default_long');
     }
 
     /**
