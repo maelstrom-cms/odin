@@ -27,7 +27,7 @@ class ProblematicPageController extends Controller
 
         $count = $query->count();
 
-        if ($request->input('refresh',)) {
+        if ($request->input('refresh')) {
             cache()->forget('pages_' . $website->id);
         }
 
