@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Website;
 use App\CrawledPage;
 use App\Jobs\PageCheck;
+use App\Website;
+use Exception;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Contracts\Routing\ResponseFactory;
 
 class ProblematicPageController extends Controller
 {
