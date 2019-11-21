@@ -189,7 +189,7 @@ class WebsiteController extends Controller
 
         $this->panel->destroy('Website removed.');
 
-        Artisan::call('horizon:terminate');
+        // Artisan::call('horizon:terminate');
 
         return $this->panel->redirect('index');
     }
