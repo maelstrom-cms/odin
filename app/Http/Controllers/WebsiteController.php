@@ -30,6 +30,7 @@ class WebsiteController extends Controller
                     'label' => 'Website',
                     'type' => 'EditLinkColumn',
                     'searchable' => true,
+                    'searchColumn' => 'url',
                 ],
                 [
                     'name' => 'ssl_enabled',
