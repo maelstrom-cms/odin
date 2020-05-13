@@ -17,7 +17,7 @@ Odin is a domain monitoring tool which has the following monitors:
 - OpenGraph extraction.
 - Uptime Monitoring with response-time graph and e-mail notifications.
 - Downtime event tracking with duration.
-- SSL Certificate grading vis SSL Labs.
+- SSL Certificate grading via SSL Labs.
 - SSL Health Monitoring with expiry and e-mail notifications.
 - Robots.txt Monitoring to email changes for review - No more accidentally blocking you're website.
 - Basic DNS Monitoring to detect name-server and primary A Records changes
