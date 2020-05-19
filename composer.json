@@ -41,12 +41,6 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/OwenMelbz/DNSParser"
-        }
-    ],
     "extra": {
         "laravel": {
             "dont-discover": []
