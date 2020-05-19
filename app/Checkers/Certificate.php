@@ -41,7 +41,10 @@ class Certificate
             'valid_to' => $certificate->expirationDate(),
             'was_valid' => $certificate->isValid(),
             'did_expire' => $certificate->isExpired(),
+            'grade' => 'N/A',
         ]);
+
+        $this->website->certificates()->save($scan);
 
         $labs = new SslLabs();
 
@@ -58,7 +61,7 @@ class Certificate
         foreach ($result->endpoints ?? [] as $endpoint) {
             if ($endpoint->statusMessage === 'Ready') {
                 $scan->grade = $endpoint->grade;
-                $this->website->certificates()->save($scan);
+                $scan->save();
                 $this->scan = $scan;
                 break;
             }

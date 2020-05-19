@@ -29,6 +29,8 @@ class WebsiteController extends Controller
                     'name' => 'url',
                     'label' => 'Website',
                     'type' => 'EditLinkColumn',
+                    'searchable' => true,
+                    'searchColumn' => 'url',
                 ],
                 [
                     'name' => 'ssl_enabled',
@@ -189,7 +191,7 @@ class WebsiteController extends Controller
 
         $this->panel->destroy('Website removed.');
 
-        Artisan::call('horizon:terminate');
+        // Artisan::call('horizon:terminate');
 
         return $this->panel->redirect('index');
     }

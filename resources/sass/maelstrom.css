@@ -9,6 +9,10 @@
     left: 9px;
 }
 
+.ant-pagination-item-link .anticon {
+	display: block;
+}
+
 code {
     margin: 0 1px;
     padding: .2em .4em;

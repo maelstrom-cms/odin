@@ -212,12 +212,18 @@ trait HasUptime
     public function getTimeSpentOfflineAttribute()
     {
         $events = $this->recent_events;
+        $lastEvent = $events->first();
+
+        if ($lastEvent['state'] !== 'up') {
+            return now()->diffAsCarbonInterval($lastEvent['date'])->forHumans(['join' => true]);
+        }
+
         $downEvent = $events->firstWhere('state', 'down');
 
         if (!$downEvent) {
             return 'Unknown...';
         }
 
-        return $downEvent['duration'];
+        return $lastEvent['date']->diffAsCarbonInterval($downEvent['date'])->forHumans(['join' => true]);
     }
 }
