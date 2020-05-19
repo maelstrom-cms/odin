@@ -2,6 +2,7 @@
 
 namespace App\Checkers;
 
+use Exception;
 use App\RobotScan;
 use GuzzleHttp\Client;
 use App\Website;
@@ -30,10 +31,17 @@ class Robots
     {
         $client = new Client();
 
-        $response = $client->request('GET', $this->website->robots_url);
+        $txt = 'Scan did not complete.';
+
+        try {
+            $response = $client->request('GET', $this->website->robots_url);
+            $txt = (string) $response->getBody();
+        } catch (Exception $e) {
+            $txt = $e->getMessage();
+        }
 
         $scan = new RobotScan([
-            'txt' => (string) $response->getBody()
+            'txt' => $txt
         ]);
 
         $this->website->robots()->save($scan);
