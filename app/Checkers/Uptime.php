@@ -44,9 +44,9 @@ class Uptime
                 RequestOptions::HEADERS => [
                     'User-Agent' => config('app.user_agent'),
                 ],
-                RequestOptions::CONNECT_TIMEOUT => 5,
-                RequestOptions::READ_TIMEOUT => 5,
-                RequestOptions::TIMEOUT => 10,
+                RequestOptions::CONNECT_TIMEOUT => 20,
+                RequestOptions::READ_TIMEOUT => 20,
+                RequestOptions::TIMEOUT => 60,
                 RequestOptions::DEBUG => false,
             ]);
 
