@@ -7,6 +7,7 @@ use App\UptimeScan;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use GuzzleHttp\RequestOptions;
+use App\Jobs\CacheUptimeReport;
 use App\Notifications\WebsiteIsDown;
 use App\Notifications\WebsiteIsBackUp;
 
@@ -94,6 +95,6 @@ class Uptime
 
     private function cache()
     {
-        $this->website->generateUptimeReport(true);
+        CacheUptimeReport::dispatch($this->website);
     }
 }
