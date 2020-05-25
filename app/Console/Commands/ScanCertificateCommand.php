@@ -16,7 +16,7 @@ class ScanCertificateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'scan:certificate';
+    protected $signature = 'scan:certificates';
 
     /**
      * The console command description.
