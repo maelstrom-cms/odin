@@ -17,7 +17,12 @@ trait HasUptime
     {
         if ($refreshCache) {
             cache()->forget($this->cache_key);
-            $this->load(['uptimes']);
+
+            // For a bit of sanity and perf, we'll only take
+            // the results for the last X days.
+            $this->load(['uptimes' => function ($builder) {
+                $builder->whereDate('created_at', now()->subDays(config('app.max_uptime_age')));
+            }]);
         }
 
         return cache()->rememberForever($this->cache_key, function () {

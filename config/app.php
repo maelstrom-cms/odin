@@ -4,6 +4,9 @@ return [
 
     'user_agent' => env('USER_AGENT', 'Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/; Odin)'),
 
+    // How many days of uptime to report on? This effects DB performance.
+    'max_uptime_age' => env('MAX_UPTIME_AGE', 90),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
