@@ -63,6 +63,68 @@ class Website extends Model
     }
 
     /**
+     * @param $builder
+     * @param $type
+     */
+    public function scopeNotAlreadyQueued($builder, $type)
+    {
+        $builder->where('in_queue_' . $type, 0);
+    }
+
+    /**
+     * @param $builder
+     */
+    public function scopeCanScanCertificates($builder)
+    {
+        $builder->notAlreadyQueued('ssl')
+            ->where('ssl_enabled', 1);
+    }
+
+    /**
+     * @param $builder
+     */
+    public function scopeCanCrawl($builder)
+    {
+        $builder->notAlreadyQueued('crawler')
+            ->where('crawler_enabled', 1);
+    }
+
+    /**
+     * @param $builder
+     */
+    public function scopeCanScanDns($builder)
+    {
+        $builder->notAlreadyQueued('dns')
+            ->where('dns_enabled', 1);
+    }
+
+    /**
+     * @param $builder
+     */
+    public function scopeCanScanOpenGraph($builder)
+    {
+        $builder->notAlreadyQueued('og');
+    }
+
+    /**
+     * @param $builder
+     */
+    public function scopeCanScanRobots($builder)
+    {
+        $builder->notAlreadyQueued('robots')
+            ->where('robots_enabled', 1);
+    }
+
+    /**
+     * @param $builder
+     */
+    public function scopeCanScanUptime($builder)
+    {
+        $builder->notAlreadyQueued('uptime')
+            ->where('uptime_enabled', 1);
+    }
+
+    /**
      * Runs all the checks for the website.
      */
     public function runInitialScans()
@@ -88,6 +150,18 @@ class Website extends Model
         } catch (Exception $e) {
             logger($e->getMessage());
         }
+    }
+
+    public function queue(string $type)
+    {
+        $this->{'in_queue_' . $type} = 1;
+        $this->save();
+    }
+
+    public function unqueue(string $type)
+    {
+        $this->{'in_queue_' . $type} = 0;
+        $this->save();
     }
 
     /**

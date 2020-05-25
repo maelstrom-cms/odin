@@ -29,6 +29,7 @@ class PageCheck implements ShouldQueue
     {
         $this->website = $website;
         $this->onQueue('default_long');
+        $this->website->queue('crawler');
     }
 
     /**
@@ -40,5 +41,7 @@ class PageCheck implements ShouldQueue
     {
         $checker = new Page($this->website);
         $checker->run();
+
+        $this->website->unqueue('crawler');
     }
 }

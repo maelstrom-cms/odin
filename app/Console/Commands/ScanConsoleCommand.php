@@ -29,7 +29,7 @@ class ScanConsoleCommand extends Command
      */
     public function handle()
     {
-        Website::where('crawler_enabled', 1)->get()->each(function (Website $website) {
+        Website::canCrawl()->get()->each(function (Website $website) {
             PageCheck::dispatch($website);
         });
     }

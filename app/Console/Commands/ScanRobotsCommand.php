@@ -30,7 +30,7 @@ class ScanRobotsCommand extends Command
      */
     public function handle()
     {
-        Website::where('robots_enabled', 1)->get()->each(function (Website $website) {
+        Website::canScanRobots()->get()->each(function (Website $website) {
             RobotsCheck::dispatch($website);
             dump('Robots check queued for ' . $website->url);
         });

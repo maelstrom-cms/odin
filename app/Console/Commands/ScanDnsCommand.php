@@ -30,7 +30,7 @@ class ScanDnsCommand extends Command
      */
     public function handle()
     {
-        Website::where('dns_enabled', 1)->get()->each(function (Website $website) {
+        Website::canScanDns()->get()->each(function (Website $website) {
             DnsCheck::dispatch($website);
             dump('DNS check queued for ' . $website->url);
         });

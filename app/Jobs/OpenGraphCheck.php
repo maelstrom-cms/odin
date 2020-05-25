@@ -27,6 +27,7 @@ class OpenGraphCheck implements ShouldQueue
     public function __construct(Website $website)
     {
         $this->website = $website;
+        $this->website->queue('og');
     }
 
     /**
@@ -38,5 +39,7 @@ class OpenGraphCheck implements ShouldQueue
     {
         $checker = new OpenGraph($this->website);
         $checker->run();
+
+        $this->website->unqueue('og');
     }
 }

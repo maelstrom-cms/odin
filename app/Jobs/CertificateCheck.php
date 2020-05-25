@@ -27,6 +27,7 @@ class CertificateCheck implements ShouldQueue
     public function __construct(Website $website)
     {
         $this->website = $website;
+        $this->website->queue('ssl');
     }
 
     /**
@@ -38,5 +39,6 @@ class CertificateCheck implements ShouldQueue
     {
         $checker = new Certificate($this->website);
         $checker->run();
+        $this->website->unqueue('ssl');
     }
 }

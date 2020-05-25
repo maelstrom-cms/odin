@@ -30,7 +30,7 @@ class ScanOpenGraphCommand extends Command
      */
     public function handle()
     {
-        Website::all()->each(function (Website $website) {
+        Website::canScanOpenGraph()->get()->each(function (Website $website) {
             OpenGraphCheck::dispatch($website);
             dump('Open Graph check queued for ' . $website->url);
         });
