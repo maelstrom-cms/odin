@@ -18,6 +18,7 @@
         "laravel/horizon": "^3.3",
         "laravel/tinker": "^1.0",
         "maelstrom-cms/toolkit": "^1.0",
+        "morrislaptop/laravel-queue-clear": "^1.2",
         "owenmelbz/domain-enforcement": "^0.0.6",
         "predis/predis": "^1.1",
         "sebastian/diff": "^3.0",
