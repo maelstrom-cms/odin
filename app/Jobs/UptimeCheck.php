@@ -43,4 +43,12 @@ class UptimeCheck implements ShouldQueue
 
         // The unqueue is annoyingly configured in the CacheUptimeReport class
     }
+
+    public function tags()
+    {
+        return [
+            static::class,
+            'Website:' . $this->website->id,
+        ];
+    }
 }

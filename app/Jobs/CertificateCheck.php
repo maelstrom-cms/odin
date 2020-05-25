@@ -41,4 +41,12 @@ class CertificateCheck implements ShouldQueue
         $checker->run();
         $this->website->unqueue('ssl');
     }
+
+    public function tags()
+    {
+        return [
+            static::class,
+            'Website:' . $this->website->id,
+        ];
+    }
 }

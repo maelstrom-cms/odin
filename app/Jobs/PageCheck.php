@@ -44,4 +44,12 @@ class PageCheck implements ShouldQueue
 
         $this->website->unqueue('crawler');
     }
+
+    public function tags()
+    {
+        return [
+            static::class,
+            'Website:' . $this->website->id,
+        ];
+    }
 }

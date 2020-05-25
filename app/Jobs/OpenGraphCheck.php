@@ -42,4 +42,12 @@ class OpenGraphCheck implements ShouldQueue
 
         $this->website->unqueue('og');
     }
+
+    public function tags()
+    {
+        return [
+            static::class,
+            'Website:' . $this->website->id,
+        ];
+    }
 }

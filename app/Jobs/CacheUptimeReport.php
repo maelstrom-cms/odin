@@ -39,4 +39,12 @@ class CacheUptimeReport implements ShouldQueue
         $this->website->generateUptimeReport(true);
         $this->website->unqueue('uptime');
     }
+
+    public function tags()
+    {
+        return [
+            static::class,
+            'Website:' . $this->website->id,
+        ];
+    }
 }

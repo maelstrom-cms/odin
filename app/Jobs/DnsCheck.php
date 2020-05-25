@@ -43,4 +43,12 @@ class DnsCheck implements ShouldQueue
 
         $this->website->unqueue('dns');
     }
+
+    public function tags()
+    {
+        return [
+            static::class,
+            'Website:' . $this->website->id,
+        ];
+    }
 }

@@ -41,5 +41,12 @@ class RobotsCheck implements ShouldQueue
         $checker->run();
 
         $this->website->unqueue('uptime');
+
+    public function tags()
+    {
+        return [
+            static::class,
+            'Website:' . $this->website->id,
+        ];
     }
 }
