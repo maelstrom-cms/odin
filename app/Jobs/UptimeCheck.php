@@ -41,6 +41,6 @@ class UptimeCheck implements ShouldQueue
         $checker = new Uptime($this->website);
         $checker->run();
 
-        $this->website->unqueue('uptime');
+        // The unqueue is annoyingly configured in the CacheUptimeReport class
     }
 }

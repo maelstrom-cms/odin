@@ -37,5 +37,6 @@ class CacheUptimeReport implements ShouldQueue
     public function handle()
     {
         $this->website->generateUptimeReport(true);
+        $this->website->unqueue('uptime');
     }
 }
