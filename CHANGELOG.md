@@ -2,7 +2,15 @@
 
 ### 🚀 Features
 
-- Uptime checks will now retry in case it's a false positive. (b99be91)
+- Uptime checks will now retry incase its a false positive. (b99be91)
+
+### 💥 Changes
+
+- Prevented storing response body on success for smaller db. (a46efbc)
+
+### 📝 Documentations
+
+- Updated changelog. (0544d50)
 
 ## 25/05/2020
 
