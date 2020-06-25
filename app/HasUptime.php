@@ -6,7 +6,20 @@ use Illuminate\Support\Collection;
 
 trait HasUptime
 {
+    private $limitResults = true;
+
     public function uptimes()
+    {
+        $relationship = $this->hasMany(UptimeScan::class);
+
+        if ($this->limitResults) {
+            $relationship->where('created_at', '<', now()->addDays(31));
+        }
+
+        return $relationship->orderBy('created_at', 'desc');
+    }
+
+    public function unfilteredUptimes()
     {
         return $this->hasMany(UptimeScan::class)
             ->where('created_at', '<', now()->addDays(31))
@@ -17,15 +30,16 @@ trait HasUptime
     {
         if ($refreshCache) {
             cache()->forget($this->cache_key);
+            $this->limitResults = false;
 
             // For a bit of sanity and perf, we'll only take
             // the results for the last X days.
             $this->load(['uptimes' => function ($builder) {
-                $builder->whereDate('created_at', now()->subDays(config('app.max_uptime_age')));
+                $builder->whereDate('created_at', '>', now()->subDays(config('app.max_uptime_age')));
             }]);
-        }
 
-        dd('x');
+            $this->limitResults = true;
+        }
 
         return cache()->rememberForever($this->cache_key, function () {
             return [

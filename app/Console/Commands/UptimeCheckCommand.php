@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Jobs\UptimeCheck;
 use App\Website;
 use Illuminate\Console\Command;
+use App\Jobs\CacheUptimeReport;
 
 class UptimeCheckCommand extends Command
 {
@@ -30,9 +31,9 @@ class UptimeCheckCommand extends Command
     public function handle()
     {
         $websiteId = $this->argument('website');
+        $website = Website::findOrFail($websiteId);
 
-        UptimeCheck::dispatchNow(
-            Website::findOrFail($websiteId)
-        );
+        UptimeCheck::dispatchNow($website);
+        CacheUptimeReport::dispatchNow($website);
     }
 }
