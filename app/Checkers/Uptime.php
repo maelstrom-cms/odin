@@ -54,8 +54,8 @@ class Uptime
                 RequestOptions::DEBUG => false,
             ]);
 
-            $responseBody = $response->getBody();
-            $keywordFound = Str::contains($responseBody, $this->website->uptime_keyword);
+            $responseBody = mb_strtolower($response->getBody());
+            $keywordFound = Str::contains($responseBody, mb_strtolower($this->website->uptime_keyword));
 
             if (!$keywordFound && $response->getStatusCode() == '200') {
                 $reason = sprintf('Keyword: %s not found (%d)', $this->website->uptime_keyword, 200);
