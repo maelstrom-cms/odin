@@ -59,7 +59,6 @@ class Uptime
 
             if (!$keywordFound && $response->getStatusCode() == '200') {
                 $reason = sprintf('Keyword: %s not found (%d)', $this->website->uptime_keyword, 200);
-
             } else {
                 $reason = sprintf('%s (%d)', $response->getReasonPhrase(), $response->getStatusCode());
             }
@@ -70,7 +69,7 @@ class Uptime
 
         $data = [
             'response_status' => $reason,
-            'response_body' => $responseBody,
+            'response_body' => $keywordFound ? '' : $responseBody,
             'was_online' => $keywordFound,
             'response_time' => $responseTime,
         ];
