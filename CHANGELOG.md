@@ -8,8 +8,13 @@
 
 - Prevented storing response body on success for smaller db. (a46efbc)
 
+### 🐛 Bugs
+
+- Increased storage capacity of response data. (6fffdcd)
+
 ### 📝 Documentations
 
+- No commit message. (524d5ca)
 - Updated changelog. (0544d50)
 
 ## 25/05/2020
