@@ -25,6 +25,8 @@ trait HasUptime
             }]);
         }
 
+        dd('x');
+
         return cache()->rememberForever($this->cache_key, function () {
             return [
                 'uptime' => $this->uptime_summary,
