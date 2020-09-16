@@ -19,7 +19,7 @@ Odin is a domain monitoring tool which has the following monitors:
 - Downtime event tracking with duration.
 - SSL Certificate grading via SSL Labs.
 - SSL Health Monitoring with expiry and e-mail notifications.
-- Robots.txt Monitoring to email changes for review - No more accidentally blocking you're website.
+- Robots.txt Monitoring to email changes for review - No more accidentally blocking your website.
 - Basic DNS Monitoring to detect name-server and primary A Records changes
 - Cron job Schedule Monitoring - Ping the API before and after your jobs run to check they're running on schedule.
 - Website Crawling with Error Reporting - Crawls SSR websites and reports on 404s, errors, mixed-content warnings etc etc, if it appears in the browser console it will appear in here.
