@@ -3,14 +3,10 @@
 namespace App\Checkers;
 
 use Exception;
+use App\Website;
 use Ramsey\Uuid\Uuid;
 use App\VisualDiff as Model;
-use Spatie\Image\Manipulations;
 use Spatie\Browsershot\Browsershot;
-use App\Website;
-use SebastianBergmann\Diff\Differ;
-use Intervention\Image\Facades\Image;
-use App\Notifications\RobotsHasChanged;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\VisualDifferenceFound;
 
@@ -21,8 +17,6 @@ class VisualDiff
     private $scan;
 
     private $url;
-
-    private $diff;
 
     public function __construct(Website $website, $url)
     {
@@ -41,28 +35,22 @@ class VisualDiff
     {
         $filename = (string) Uuid::uuid4() . '.png';
 
-//        $this->scan = new Model([
-//            'url' => $this->url,
-////            'screenshot' => $filename,
-//            'screenshot' => '80df5ce1-0edf-46e3-a222-090069cb6a48.png',
-//        ]);
-
-        $this->scan = $this->website->visualDiffs()
-            ->latest()
-            ->where('url', $this->url)
-            ->first();
+        $this->scan = new Model([
+            'url' => $this->url,
+            'screenshot' => $filename,
+        ]);
 
         try {
-//            Browsershot::url($this->url)
-//                ->windowSize(1440, 1024)
-//                ->fullPage()
-//                ->waitUntilNetworkIdle()
-//                ->setDelay(1000)
-//                ->save(
-//                    Storage::disk('screenshots')->path($filename)
-//                );
+            Browsershot::url($this->url)
+                ->windowSize(1440, 1024)
+                ->fullPage()
+                ->waitUntilNetworkIdle()
+                ->setDelay(2000)
+                ->save(
+                    Storage::disk('screenshots')->path($filename)
+                );
 
-//            $this->website->visualDiffs()->save($this->scan);
+            $this->website->visualDiffs()->save($this->scan);
         } catch (Exception $exception) {
             if (app()->environment('dev')) {
                 throw $exception;
@@ -101,7 +89,7 @@ class VisualDiff
                 Storage::disk('screenshots')->path($this->scan->diff_path)
             );
 
-            $this->scan->diff_found = data_get($diff, 'pixels', 0) > 10;
+            $this->scan->diff_found = data_get($diff, 'pixels', 0) > 20;
         } catch (Exception $exception) {
             if (app()->environment('dev')) {
                 throw $exception;
