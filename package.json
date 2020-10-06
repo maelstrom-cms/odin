@@ -24,6 +24,8 @@
         "antd": "^3.26.17",
         "aos": "^2.3.4",
         "chart.js": "^2.9.3",
+        "pixelmatch": "^5.2.1",
+        "puppeteer": "^5.3.1",
         "react": "16.8.6",
         "react-chartjs-2": "^2.9.0",
         "react-diff-viewer": "^2.0.6"

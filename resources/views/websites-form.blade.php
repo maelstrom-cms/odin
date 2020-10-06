@@ -55,6 +55,14 @@
                 'label' => 'Enable Crawler?'
             ])
         </div>
+
+        <div class="w-1/3">
+            @include('maelstrom::inputs.switch', [
+                'name' => 'visual_diff_enabled',
+                'label' => 'Enable Visual Diff?',
+                'hide_off' => ['visual_diff_urls'],
+            ])
+        </div>
     </div>
 </div>
 
@@ -100,3 +108,10 @@
         <p>Once you've "Saved" this website, we'll provide you with your ping endpoints.</p>
     </div>
 @endif
+
+@include('maelstrom::inputs.text', [
+    'html_type' => 'textarea',
+    'name' => 'visual_diff_urls',
+    'label' => 'URLs to visually monitor.',
+    'help' => '1 URL per line to check, Please include domain and protocol.',
+])

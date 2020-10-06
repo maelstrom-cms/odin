@@ -21,6 +21,7 @@ class Website extends Model
     use HasOpenGraph;
     use HasCertificates;
     use HasCrawledPages;
+    use HasVisualDiffs;
 
     protected $fillable = [
         'url',
@@ -33,6 +34,8 @@ class Website extends Model
         'cron_enabled',
         'crawler_enabled',
         'cron_key',
+        'visual_diff_urls',
+        'visual_diff_enabled',
     ];
 
     protected static function boot()
