@@ -32,6 +32,7 @@ class VisualDiffCheck implements ShouldQueue
     {
         $this->website = $website;
         $this->url = $url;
+        $this->onQueue('default_long');
     }
 
     /**
