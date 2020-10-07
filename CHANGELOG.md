@@ -2,6 +2,7 @@
 
 ### 🚀 Features
 
+- Added automatic-changelog package. (9488f0e)
 - Added a scheduler for visual diffs. (ea2f7a7)
 
 ## 06/10/2020
