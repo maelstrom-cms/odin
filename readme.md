@@ -65,8 +65,15 @@ sudo apt-get install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcai
 sudo npm install --global --unsafe-perm puppeteer
 sudo chmod -R o+rx /usr/lib/node_modules/puppeteer/.local-chromium
 ```
-
 You can read more about this: https://github.com/spatie/browsershot#requirements
+
+## Using the Visual Diff
+
+The visual diff tool requires both `spatie/browsershot` (which uses puppeteer) and `Pixelmatch` 
+
+We use the following package to interact with the Pixelmatch node binaries: https://github.com/QortexDevs/laravel-visual-diff
+
+Quick install: `npm install pixelmatch`
 
 ## Deploying
 

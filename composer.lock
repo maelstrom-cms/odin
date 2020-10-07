@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09c056a8ad73a9f64a51990a47725390",
+    "content-hash": "ffc3de4ee3b334c6540f3e9557e47a36",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2795,6 +2795,71 @@
             "time": "2020-05-03T19:32:03+00:00"
         },
         {
+            "name": "qortex/laravel-7-visual-diff",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/QortexDevs/laravel-visual-diff.git",
+                "reference": "866cd9180aa7fc66e70adfe170498ac289d4b440"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/QortexDevs/laravel-visual-diff/zipball/866cd9180aa7fc66e70adfe170498ac289d4b440",
+                "reference": "866cd9180aa7fc66e70adfe170498ac289d4b440",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^7",
+                "php": "^7.1",
+                "spatie/browsershot": "^3.37",
+                "symfony/process": "^5.1"
+            },
+            "require-dev": {
+                "orchestra/testbench-dusk": "3.6.x@dev",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BeyondCode\\VisualDiff\\VisualDiffServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BeyondCode\\VisualDiff\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "marcel@beyondco.de",
+                    "homepage": "https://beyondcode.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Nick Mitin",
+                    "email": "nick.mitin@qortex.ru",
+                    "homepage": "https://qortex.ru",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Marcel Pociot's based beyondcode/laravel-visual-diff adapted for Laravel 7",
+            "homepage": "https://github.com/qortex/laravel-visual-diff",
+            "keywords": [
+                "beyondcode",
+                "laravel-visual-diff",
+                "qortex",
+                "visual regression"
+            ],
+            "time": "2020-08-08T04:25:46+00:00"
+        },
+        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -3293,6 +3358,59 @@
                 "spatie"
             ],
             "time": "2017-09-18T09:51:20+00:00"
+        },
+        {
+            "name": "spatie/once",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/once.git",
+                "reference": "6d4a379546684043c225b9a96d8ced7b8a84b889"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/once/zipball/6d4a379546684043c225b9a96d8ced7b8a84b889",
+                "reference": "6d4a379546684043c225b9a96d8ced7b8a84b889",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.1",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Once\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A magic memoization function",
+            "homepage": "https://github.com/spatie/once",
+            "keywords": [
+                "cache",
+                "callable",
+                "memozation",
+                "once",
+                "spatie"
+            ],
+            "time": "2020-02-18T15:10:38+00:00"
         },
         {
             "name": "spatie/robots-txt",
@@ -6983,6 +7101,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

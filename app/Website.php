@@ -7,6 +7,7 @@ use App\Jobs\DnsCheck;
 use App\Jobs\RobotsCheck;
 use App\Jobs\UptimeCheck;
 use App\Jobs\OpenGraphCheck;
+use App\Jobs\VisualDiffCheck;
 use App\Jobs\CertificateCheck;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,7 @@ class Website extends Model
     use HasOpenGraph;
     use HasCertificates;
     use HasCrawledPages;
+    use HasVisualDiffs;
 
     protected $fillable = [
         'url',
@@ -33,6 +35,8 @@ class Website extends Model
         'cron_enabled',
         'crawler_enabled',
         'cron_key',
+        'visual_diff_urls',
+        'visual_diff_enabled',
     ];
 
     protected static function boot()
@@ -125,6 +129,14 @@ class Website extends Model
     }
 
     /**
+     * @param $builder
+     */
+    public function scopeCanScanVisualDiffs($builder)
+    {
+        $builder->where('visual_diff_enabled', 1);
+    }
+
+    /**
      * Runs all the checks for the website.
      */
     public function runInitialScans()
@@ -146,6 +158,10 @@ class Website extends Model
 
             if ($this->uptime_enabled) {
                 UptimeCheck::dispatch($this);
+            }
+
+            if ($this->visual_diff_enabled) {
+                VisualDiffCheck::dispatch($this);
             }
         } catch (Exception $e) {
             logger($e->getMessage());

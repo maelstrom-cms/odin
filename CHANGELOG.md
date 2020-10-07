@@ -1,3 +1,23 @@
+## 07/10/2020
+
+### 🚀 Features
+
+- Added automatic-changelog package. (9488f0e)
+- Added a scheduler for visual diffs. (ea2f7a7)
+
+## 06/10/2020
+
+### 🚀 Features
+
+- POC for visual diffs. (7066825)
+
+## 17/09/2020
+
+### 💥 Changes
+
+- Updated horizon. (36efe12)
+- Updated deps. (b73fc97)
+
 ## 25/06/2020
 
 ### 🚀 Features
