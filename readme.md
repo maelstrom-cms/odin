@@ -31,6 +31,7 @@ Odin is a domain monitoring tool which has the following monitors:
 - CertificateIsInvalid
 - CertificateIsWeak
 - CertificateWillExpire
+- VisualDifferenceFound
 - DnsHasChanged
 - RobotsHasChanged
 - WebsiteIsBackUp

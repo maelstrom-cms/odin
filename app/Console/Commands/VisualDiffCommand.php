@@ -46,6 +46,7 @@ class VisualDiffCommand extends Command
         }
 
         $website->visual_urls_to_scan->each(function ($url) use ($website) {
+            dump('Visual diff running for ' . $url);
             VisualDiffCheck::dispatchNow($website, $url);
         });
     }
