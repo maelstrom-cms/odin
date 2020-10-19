@@ -24,6 +24,7 @@ class WebsiteController extends Controller
     {
         $this->panel = maelstrom(Website::class)
             ->setNameField('url')
+            ->setPerPage(20)
             ->setTableHeadings([
                 [
                     'name' => 'url',
