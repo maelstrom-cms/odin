@@ -28,4 +28,5 @@ Route::middleware('auth')->group(function () {
     Route::get('websites/{website}/problems', 'ProblematicPageController')->name('problems');
     Route::get('websites/{website}/problems/scan', 'ProblematicPageController@scan')->name('problems.scan');
     Route::delete('websites/{website}/problems/{page}/delete', 'ProblematicPageController@delete')->name('problems.delete');
+    Route::get('websites/{website}/visual-diffs', 'VisualDiffsController')->name('visual-diffs');
 });

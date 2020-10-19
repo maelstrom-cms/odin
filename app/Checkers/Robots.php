@@ -6,6 +6,7 @@ use Exception;
 use App\RobotScan;
 use GuzzleHttp\Client;
 use App\Website;
+use Illuminate\Support\Str;
 use SebastianBergmann\Diff\Differ;
 use App\Notifications\RobotsHasChanged;
 
@@ -14,6 +15,10 @@ class Robots
     private $website;
 
     private $scan;
+
+    private const RETRY_TIMES = 3;
+
+    private const RETRY_SLEEP_MILLISECONDS = 5000;
 
     public function __construct(Website $website)
     {
@@ -29,15 +34,14 @@ class Robots
 
     private function fetch()
     {
-        $client = new Client();
-
-        $txt = 'Scan did not complete.';
-
         try {
-            $response = $client->request('GET', $this->website->robots_url);
-            $txt = (string) $response->getBody();
-        } catch (Exception $e) {
-            $txt = $e->getMessage();
+            $txt = retry(static::RETRY_TIMES, function () {
+                $response = (new Client)->request('GET', $this->website->robots_url);
+
+                return (string) $response->getBody();
+            }, static::RETRY_SLEEP_MILLISECONDS);
+        } catch (Exception $exception) {
+            $txt = $exception->getMessage();
         }
 
         $scan = new RobotScan([

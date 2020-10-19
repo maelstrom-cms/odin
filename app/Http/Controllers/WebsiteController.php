@@ -68,6 +68,12 @@ class WebsiteController extends Controller
                     'label' => 'Crawler',
                     'align' => 'center',
                 ],
+                [
+                    'name' => 'visual_diff_enabled',
+                    'type' => 'BooleanColumn',
+                    'label' => 'Visual Diffs',
+                    'align' => 'center',
+                ],
             ]);
     }
 

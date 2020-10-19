@@ -27,6 +27,10 @@
                 <div class="mb-10" data-component="DnsReport" data-website='@json($entry)' data-endpoint="{{ route('dns', $entry) }}"></div>
             @endif
 
+            @if ($entry->visual_diff_enabled)
+                <div class="mb-10" data-component="VisualDiff" data-website='@json($entry)' data-endpoint="{{ route('visual-diffs', $entry) }}"></div>
+            @endif
+
             @if ($entry->cron_enabled)
                 <div class="mb-10" data-component="CronReport" data-website='@json($entry)' data-endpoint="{{ route('crons', $entry) }}"></div>
             @endif
