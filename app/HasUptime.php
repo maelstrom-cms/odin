@@ -123,6 +123,7 @@ trait HasUptime
                    'value' => $scan->response_time,
                ];
             })
+            ->reverse()
             ->values();
     }
 
