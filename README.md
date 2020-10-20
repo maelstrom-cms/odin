@@ -14,40 +14,40 @@ Theres no automated testing, and most likely won't work for anything less than P
 
 Odin is a domain monitoring tool which has the following monitors:
 
-- OpenGraph extraction.
-- Uptime Monitoring with response-time graph and e-mail notifications.
-- Downtime event tracking with duration.
-- SSL Certificate grading via SSL Labs.
-- SSL Health Monitoring with expiry and e-mail notifications.
-- Robots.txt Monitoring to email changes for review - No more accidentally blocking your website.
-- Basic DNS Monitoring to detect name-server and primary A Records changes
-- Cron job Schedule Monitoring - Ping the API before and after your jobs run to check they're running on schedule.
-- Website Crawling with Error Reporting - Crawls SSR websites and reports on 404s, errors, mixed-content warnings etc etc, if it appears in the browser console it will appear in here.
+-   OpenGraph extraction.
+-   Uptime Monitoring with response-time graph and e-mail notifications.
+-   Downtime event tracking with duration.
+-   SSL Certificate grading via SSL Labs.
+-   SSL Health Monitoring with expiry and e-mail notifications.
+-   Robots.txt Monitoring to email changes for review - No more accidentally blocking your website.
+-   Basic DNS Monitoring to detect name-server and primary A Records changes
+-   Cron job Schedule Monitoring - Ping the API before and after your jobs run to check they're running on schedule.
+-   Website Crawling with Error Reporting - Crawls SSR websites and reports on 404s, errors, mixed-content warnings etc etc, if it appears in the browser console it will appear in here.
 
 ## Notifications Fired
 
-- CertificateHasExpired
-- CertificateIsExpiring
-- CertificateIsInvalid
-- CertificateIsWeak
-- CertificateWillExpire
-- VisualDifferenceFound
-- DnsHasChanged
-- RobotsHasChanged
-- WebsiteIsBackUp
-- WebsiteIsDown
+-   CertificateHasExpired
+-   CertificateIsExpiring
+-   CertificateIsInvalid
+-   CertificateIsWeak
+-   CertificateWillExpire
+-   VisualDifferenceFound
+-   DnsHasChanged
+-   RobotsHasChanged
+-   WebsiteIsBackUp
+-   WebsiteIsDown
 
 ## Installing
 
 You should be able to follow any (good) up to date Laravel install guide, the jist is as follows:
 
-- git clone the repository
-- composer install
-- npm install
-- copy .env.example to .env and modify the settings
-- npm run dev/watch/prod
+-   git clone the repository
+-   composer install
+-   npm install
+-   copy .env.example to .env and modify the settings
+-   npm run dev/watch/prod
 
-You can then visit the webpage and /register to create an account.
+You can then visit the webpage and / register to create an account.
 
 By default the Jobs are able to be queued and executed by a queue worker/horizon - We use horizon, but you can configure/protect this however you need.
 
@@ -57,24 +57,33 @@ We use a modified version of the `spatie/browsershot` package which provides the
 
 Quick install for puppeteer:
 
-macOS: `npm install puppeteer --global`
+macOS:
 
-Ubuntu 16:
+```sh
+npm install puppeteer --global
 ```
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+
+Ubuntu 18 / 20:
+
+```sh
+curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+
 sudo apt-get install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+
 sudo npm install --global --unsafe-perm puppeteer
+
 sudo chmod -R o+rx /usr/lib/node_modules/puppeteer/.local-chromium
 ```
+
 You can read more about this: https://github.com/spatie/browsershot#requirements
 
 ## Using the Visual Diff
 
-The visual diff tool requires both `spatie/browsershot` (which uses puppeteer) and `Pixelmatch` 
+The visual diff tool requires both `spatie/browsershot` (which uses puppeteer) and `Pixelmatch`
 
 We use the following package to interact with the Pixelmatch node binaries: https://github.com/QortexDevs/laravel-visual-diff
 
-Quick install: `npm install pixelmatch`
+Quick install: `npm i pixelmatch`
 
 ## Deploying
 
@@ -83,22 +92,29 @@ Deploying the project is very similar to installing it, the steps will differ de
 ## Screenshots
 
 ### Creating an account
+
 ![register](https://user-images.githubusercontent.com/1094740/66187514-d5465400-e67c-11e9-8582-08d2aa331daa.png)
 
 ### Logging in
+
 ![login](https://user-images.githubusercontent.com/1094740/66187512-d5465400-e67c-11e9-9c2e-8b81e58ec73a.png)
 
 ### Editing your profile
+
 ![profile](https://user-images.githubusercontent.com/1094740/66187513-d5465400-e67c-11e9-9a54-133c4e270eb2.png)
 
 ### Creating a monitor
+
 ![create](https://user-images.githubusercontent.com/1094740/66187508-d4adbd80-e67c-11e9-922b-501156069934.png)
 
 ### Editing a monitor
+
 ![edit](https://user-images.githubusercontent.com/1094740/66187510-d4adbd80-e67c-11e9-95ed-4ee3bd77f591.png)
 
 ### Viewing all monitors
+
 ![listing](https://user-images.githubusercontent.com/1094740/66187511-d5465400-e67c-11e9-95af-e15f89e7f5e8.png)
 
 ### Viewing a report/monitor
+
 ![report](https://user-images.githubusercontent.com/1094740/66187515-d5465400-e67c-11e9-9a37-081b841ae11c.png)
