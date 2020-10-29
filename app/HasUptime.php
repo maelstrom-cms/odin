@@ -8,6 +8,11 @@ trait HasUptime
 {
     private $limitResults = true;
 
+    public function setLimitResults($state)
+    {
+        $this->limitResults = $state;
+    }
+
     public function uptimes()
     {
         $relationship = $this->hasMany(UptimeScan::class);
@@ -89,9 +94,12 @@ trait HasUptime
 
     public function getUptimeAttribute()
     {
-        $latest = $this->uptimes->sortByDesc('created_at')->first();
-        $online = $this->uptimes->firstWhere('was_online', 1);
-        $offline = $this->uptimes->firstWhere('was_online', 0);
+        $child = Website::find($this->id);
+        $child->setLimitResults(false);
+
+        $latest = $child->uptimes()->orderBy('created_at')->take(1)->first();
+        $online = $child->uptimes()->firstWhere('was_online', 1);
+        $offline = $child->uptimes()->firstWhere('was_online', 0);
 
         if (!$latest) {
             return 'Still collecting data...';
