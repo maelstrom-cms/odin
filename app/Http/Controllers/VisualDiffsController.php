@@ -39,9 +39,9 @@ class VisualDiffsController extends Controller
             if ($result->count() !== 2) {
                 return null;
             }
-
-            $previous = $result->first();
-            $current = $result->last();
+            
+            $previous = $result->last();
+            $current = $result->first();
 
             if (!$previous->diff_found&& !$current->diff_found) {
                 return null;
