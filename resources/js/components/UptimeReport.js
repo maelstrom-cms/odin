@@ -67,6 +67,8 @@ export default class UptimeReport extends React.Component {
     renderResponseTime() {
         const { response_times } = this.state;
 
+        response_times.reverse();
+
         const labels = response_times.map( i => i.date );
         const data = response_times.map( i => i.value );
 
