@@ -4,6 +4,7 @@ namespace App\Checkers;
 
 use Exception;
 use App\Website;
+use App\CrawledPage;
 use Spatie\Crawler\Crawler;
 use GuzzleHttp\RequestOptions;
 use App\Crawler\CrawlObserver;
@@ -20,7 +21,20 @@ class Page
 
     public function run()
     {
+        $this->prune();
         $this->fetch();
+    }
+
+    private function prune()
+    {
+        $this
+            ->website
+            ->crawledPages()
+            ->where('updated_at', '<', now()->subMonth())
+            ->get()
+            ->each(function ($url) {
+                $url->delete();
+        });
     }
 
     private function fetch()
@@ -38,7 +52,7 @@ class Page
                 ],
             ])
                 ->ignoreRobots()
-//                ->executeJavaScript()
+                ->executeJavaScript()
                 ->setDelayBetweenRequests(1000)
                 ->setConcurrency(3)
                 ->setCrawlObserver(new CrawlObserver($this->website))

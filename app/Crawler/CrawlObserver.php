@@ -3,6 +3,7 @@
 namespace App\Crawler;
 
 use App\Website;
+use App\CrawledPage;
 use Illuminate\Support\Str;
 use App\Jobs\BrowserConsoleCheck;
 use Psr\Http\Message\UriInterface;
@@ -54,7 +55,7 @@ class CrawlObserver extends SpatieCrawlObserver
         $page->exception = null;
         $page->response = $response->getStatusCode() . ' - ' . $response->getReasonPhrase();
 
-        BrowserConsoleCheck::dispatch($page);
+        BrowserConsoleCheck::dispatch($this->website, $page);
 
         return $page->save();
     }
@@ -78,6 +79,13 @@ class CrawlObserver extends SpatieCrawlObserver
         $page->response = null;
         $page->exception = $requestException->getCode() . ' - ' . $requestException->getMessage();
 
+        $this->notify($page);
+
         return $page->save();
+    }
+
+    private function notify(CrawledPage $page)
+    {
+//        dump($page->exception);
     }
 }

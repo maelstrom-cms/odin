@@ -36,6 +36,7 @@ Odin is a domain monitoring tool which has the following monitors:
 -   RobotsHasChanged
 -   WebsiteIsBackUp
 -   WebsiteIsDown
+-   BrowserMessageDetected
 
 ## Installing
 

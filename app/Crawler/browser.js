@@ -48,6 +48,16 @@ const callChrome = async () => {
             console.log("\n");
         });
 
+        page.on('pageerror', msg => {
+            console.log(msg);
+            console.log("\n");
+        });
+
+        page.on('error', msg => {
+            console.log(msg);
+            console.log("\n");
+        });
+
         if (request.options && request.options.disableJavascript) {
             await page.setJavaScriptEnabled(false);
         }
