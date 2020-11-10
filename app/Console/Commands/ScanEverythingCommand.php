@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Website;
 use App\Jobs\DnsCheck;
+use App\Jobs\PageCheck;
 use App\Jobs\RobotsCheck;
 use App\Jobs\UptimeCheck;
 use App\Checkers\Certificate;
@@ -42,6 +43,8 @@ class ScanEverythingCommand extends Command
             UptimeCheck::dispatch($website);
             dump('Uptime check queued.');
             DnsCheck::dispatch($website);
+            dump('DNS check queued.');
+            PageCheck::dispatch($website);
             dump('DNS check queued.');
             echo PHP_EOL;
         });
