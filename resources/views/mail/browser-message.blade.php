@@ -1,7 +1,7 @@
 @component('mail::message')
 # Browser message detected on:  {{ $website->url }}
 
-The following URL flagged up a console warning, please investigate.
+The following URL (<a href="{{ $page->url }}">{{ $page->url }}</a>) flagged up a console warning, please investigate.
 
 Please see the output below:
 
