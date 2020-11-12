@@ -45,7 +45,7 @@ class VisualDiff
                 ->windowSize(1440, 1024)
                 ->fullPage()
                 ->waitUntilNetworkIdle()
-                ->setDelay(2000)
+                ->setDelay(5000)
                 ->save(
                     Storage::disk('screenshots')->path($filename)
                 );
