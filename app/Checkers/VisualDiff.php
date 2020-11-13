@@ -43,6 +43,7 @@ class VisualDiff
         try {
             Browsershot::url($this->url)
                 ->windowSize(1440, 1024)
+                ->userAgent(config('app.user_agent'))
                 ->fullPage()
                 ->waitUntilNetworkIdle()
                 ->setDelay(5000)
