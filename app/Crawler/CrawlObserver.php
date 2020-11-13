@@ -55,6 +55,18 @@ class CrawlObserver extends SpatieCrawlObserver
         $page->exception = null;
         $page->response = $response->getStatusCode() . ' - ' . $response->getReasonPhrase();
 
+        if ($foundOnUrl) {
+            $pages = [];
+
+            if (!empty($page->found_on)) {
+                $pages = $page->found_on;
+            }
+
+            $pages[] = (string) $foundOnUrl;
+
+            $page->found_on = array_unique($pages);
+        }
+
         BrowserConsoleCheck::dispatch($this->website, $page);
 
         return $page->save();

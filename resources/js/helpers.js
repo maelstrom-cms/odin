@@ -12,6 +12,8 @@ export const YELLOW = '#efaf41';
 export const RED = '#e23c39';
 
 export const truncate = (string, length = 60) => {
+    string = string || '';
+
     if (string.length > length && string.length > 0) {
         let new_str = string + ' ';
         new_str = string.substr(0, length);

@@ -6,6 +6,7 @@ use App\CrawledPage;
 use App\Jobs\PageCheck;
 use App\Website;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,7 +18,7 @@ class ProblematicPageController extends Controller
      *
      * @param Request $request
      * @param Website $website
-     * @return void
+     * @return Application|ResponseFactory|Response
      * @throws Exception
      */
     public function __invoke(Request $request, Website $website)
@@ -37,6 +38,7 @@ class ProblematicPageController extends Controller
                 ->where(function ($query) {
                     $query->whereNotNull('messages');
                     $query->orWhereNotNull('exception');
+                    $query->orWhere('response', 'NOT LIKE', '%200%');
                 })
                 ->get()
                 ->toArray();
@@ -67,6 +69,7 @@ class ProblematicPageController extends Controller
      * @param Request $request
      * @param Website $website
      * @param CrawledPage $page
+     * @return Application|ResponseFactory|Response
      * @throws Exception
      */
     public function delete(Request $request, Website $website, CrawledPage $page)

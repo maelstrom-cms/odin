@@ -63,13 +63,26 @@ export default class CrawlReport extends React.Component {
         const expanded = function (row) {
             return <div>
                 <div>
-                    <h4>Response: { row.response || 'Unknown' }</h4>
-                    <h4>Exceptions: { row.exception || 'N/A' }</h4>
-                    <pre style={{
+                    { row.response && <h4>Response: { row.response || 'Unknown' }</h4> }
+                    { row.exception && <h4>Exceptions: { row.exception || 'N/A' }</h4> }
+                    { row.messages && <pre style={{
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordWrap: 'break-word',
-                    }} className="mt-4 shadow block max-w-full p-6 bg-white m-0" dangerouslySetInnerHTML={{ __html: (row.messages) }} />
+                    }} className="mt-4 shadow block max-w-full p-6 bg-white m-0" dangerouslySetInnerHTML={{ __html: (row.messages) }} /> }
+                    { row.found_on.length && <div
+                            className="mt-4 ant-list ant-list-sm ant-list-split ant-list-bordered ant-list-something-after-last-item">
+                            <div className="ant-list-header">
+                                <div>URL found on</div>
+                            </div>
+                            <ul className="ant-list-items">
+                                {row.found_on.map((url, i) => <li key={i} className="ant-list-item">
+                                    <a href={url} target="_blank">
+                                        { url }
+                                    </a>
+                                </li>)}
+                            </ul>
+                        </div> }
                 </div>
             </div>
         };
@@ -94,7 +107,7 @@ export default class CrawlReport extends React.Component {
                 expandedRowRender={ expanded }
                 columns={[
                     { key: 'response', title: 'Response', dataIndex: 'response', render: (text, row) => tag(row) },
-                    { key: 'updated_at', title: 'Found on', dataIndex: 'updated_at', render: text => formatDateTime(text) },
+                    { key: 'updated_at', title: 'Date found', dataIndex: 'updated_at', render: text => formatDateTime(text) },
                     { key: 'url', title: 'URL', dataIndex: 'url', render: (text, row) =>  url(row) },
                     { key: 'summary', title: 'Messages', dataIndex: 'summary', render: (text, row) =>  summary(row) },
                     { key: 'id', title: '', dataIndex: 'id', render: (text, row) =>  remove(row, this)},
