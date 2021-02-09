@@ -41,6 +41,8 @@ class BrowserConsole
 
         if ($this->shouldReport($messages)) {
             $this->page->messages = $messages;
+        } else {
+            $this->page->messages = null;
         }
 
         $this->page->save();
