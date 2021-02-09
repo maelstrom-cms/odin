@@ -91,7 +91,7 @@ class CrawlObserver extends SpatieCrawlObserver
         $page->response = null;
         $page->exception = $requestException->getCode() . ' - ' . $requestException->getMessage();
 
-        $this->notify($page);
+        BrowserConsoleCheck::dispatch($this->website, $page);
 
         return $page->save();
     }
