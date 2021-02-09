@@ -9,6 +9,7 @@ use App\Jobs\BrowserConsoleCheck;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
+use App\Notifications\BrowserMessageDetected;
 use Spatie\Crawler\CrawlObserver as SpatieCrawlObserver;
 
 class CrawlObserver extends SpatieCrawlObserver
@@ -91,13 +92,15 @@ class CrawlObserver extends SpatieCrawlObserver
         $page->response = null;
         $page->exception = $requestException->getCode() . ' - ' . $requestException->getMessage();
 
-        BrowserConsoleCheck::dispatch($this->website, $page);
+        $this->notify($page);
 
         return $page->save();
     }
 
     private function notify(CrawledPage $page)
     {
-//        dump($page->exception);
+        $page->website->user->notify(
+            new BrowserMessageDetected($page->website, $page)
+        );
     }
 }
