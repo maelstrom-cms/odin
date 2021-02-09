@@ -1,3 +1,58 @@
+## 09/02/2021
+
+### 💥 Changes
+
+- Excluded internal errors from reports. (784fe81)
+- Updated deps. (2a46f3c)
+
+### 🐛 Bugs
+
+- Fixing visual diff controller. (4cb79f1)
+
+## 13/11/2020
+
+### 💥 Changes
+
+- Added which urls the crawler found links on to help debug. (098b65c)
+- Replaced user agent with Googlebot identifier to allow through systems such as Cloudflare and made visual difference use the same setting. (ea72140)
+
+## 12/11/2020
+
+### 💥 Changes
+
+- Increased visual screenshot delay to 5 seconds incase theres loading animations. (bfd1102)
+
+## 11/11/2020
+
+### 🐛 Bugs
+
+- Added missing error url. (f09741f)
+
+## 29/10/2020
+
+### 🐛 Bugs
+
+- Fixed uptime graph being reversed. (03a5cf0)
+- Fixed issue where uptime summary would be restricted by 30 days. (b4c9b9c)
+- Fixed wrong visual diff heatmap showing. (0d8a9b6)
+
+## 19/10/2020
+
+### 🚀 Features
+
+- Beta visual diffs. (13700bb)
+
+### 💥 Changes
+
+- Updated prod builds. (8f12e34)
+- Increased per page. (198ab6e)
+
+## 08/10/2020
+
+### 📝 Documentations
+
+- Added event to doc. (1e055e9)
+
 ## 07/10/2020
 
 ### 🚀 Features
