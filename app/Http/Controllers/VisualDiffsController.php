@@ -39,7 +39,7 @@ class VisualDiffsController extends Controller
             if ($result->count() !== 2) {
                 return null;
             }
-            
+
             $previous = $result->last();
             $current = $result->first();
 
@@ -54,7 +54,7 @@ class VisualDiffsController extends Controller
                 'diff' => $current->diff_url,
                 'date' => $current->created_at,
             ];
-        })->filter();
+        })->filter()->values();
     }
 
     /**

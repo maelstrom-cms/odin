@@ -65,7 +65,7 @@ class BrowserConsole
             return false;
         }
 
-        foreach (config('odin.ignore_console_errors') as $phrase) {
+        foreach (config('app.ignore_console_errors') as $phrase) {
             if (Str::contains($messages, $phrase)) {
                 return false;
             }

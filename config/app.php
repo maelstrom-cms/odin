@@ -7,6 +7,10 @@ return [
     // How many days of uptime to report on? This effects DB performance.
     'max_uptime_age' => env('MAX_UPTIME_AGE', 90),
 
+    'ignore_console_errors' => [
+        'app/Crawler/browser.js',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
