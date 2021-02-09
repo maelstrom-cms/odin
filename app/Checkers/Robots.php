@@ -38,7 +38,13 @@ class Robots
             $txt = retry(static::RETRY_TIMES, function () {
                 $response = (new Client)->request('GET', $this->website->robots_url);
 
-                return (string) $response->getBody();
+                $body = (string) $response->getBody();
+
+                if (Str::contains($body, 'cURL error')) {
+                    throw new Exception($body);
+                }
+
+                return $body;
             }, static::RETRY_SLEEP_MILLISECONDS);
         } catch (Exception $exception) {
             $txt = $exception->getMessage();

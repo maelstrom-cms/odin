@@ -4,6 +4,7 @@ namespace App\Checkers;
 
 use App\Website;
 use App\CrawledPage;
+use Illuminate\Support\Str;
 use App\Crawler\Browsershot;
 use App\Notifications\BrowserMessageDetected;
 
@@ -33,10 +34,14 @@ class BrowserConsole
 
     private function fetch()
     {
-        $this->page->messages = Browsershot::url($this->page->url)
+        $messages = Browsershot::url($this->page->url)
             ->setBinPath(app_path('Crawler/browser.js'))
             ->windowSize(1440, 900)
             ->consoleOutput() ?: null;
+
+        if ($this->shouldReport($messages)) {
+            $this->page->messages = $messages;
+        }
 
         $this->page->save();
     }
@@ -50,5 +55,20 @@ class BrowserConsole
         $this->website->user->notify(
             new BrowserMessageDetected($this->website, $this->page)
         );
+    }
+
+    private function shouldReport($messages)
+    {
+        if (empty($messages)) {
+            return false;
+        }
+
+        foreach (config('odin.ignore_console_errors') as $phrase) {
+            if (Str::contains($messages, $phrase)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -31,8 +31,11 @@ class BrowserConsoleCommand extends Command
     {
         $pageId = $this->argument('crawled_page');
 
+        $page = CrawledPage::findOrFail($pageId);
+        $website = $page->website;
+
         BrowserConsoleCheck::dispatchNow(
-            CrawledPage::findOrFail($pageId)
+            $website, $page
         );
     }
 }
