@@ -77,10 +77,6 @@ RUN docker-php-ext-install posix phar readline
 # already loaded
 RUN docker-php-ext-install pdo mbstring dom iconv json
 
-RUN addgroup -S odin && adduser -S odin -G odin -G www-data -G root
-RUN mkdir -p /home/odin/.composer && \
-    chown -R odin:odin /home/odin
-
 # Installs latest Chromium (85) package.
 RUN apk add --no-cache \
       chromium \
@@ -91,7 +87,8 @@ RUN apk add --no-cache \
       ca-certificates \
       ttf-freefont \
       nodejs \
-      yarn
+      yarn \
+      nginx
 
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
@@ -107,9 +104,18 @@ ADD . /var/www/
 
 COPY ./.env.example /var/www/.env
 
-RUN chown -R odin:www-data /var/www
+COPY ./storage /opt/storage
 
-USER odin
+COPY ./odin.conf /etc/nginx/conf.d/default.conf
+
+RUN mkdir /run/nginx && chown nginx:root /run/nginx
+
+RUN chown -R nginx:nginx /var/www
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
+USER nginx
 
 RUN composer install
 
@@ -123,6 +129,6 @@ RUN npm i pixelmatch
 
 RUN npm run prod
 
-EXPOSE 9000
+EXPOSE 80
 
 ENTRYPOINT /var/www/entrypoint.sh
