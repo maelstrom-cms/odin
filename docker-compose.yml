@@ -1,0 +1,49 @@
+version: "3.3"
+
+services:
+  odin:
+    build: .
+    container_name: odin
+    shm_size: '2gb'
+    security_opt:
+      - "seccomp:$PWD/chrome.json"
+    ports:
+      - "80:9000"
+    volumes:
+      - data:/var/www/storage
+    environment:
+      - REGISTRATIONS_ENABLED=false
+      - ENFORCE_DOMAIN=false
+      - HORIZON_ENABLED=true
+      - DEBUGBAR_ENABLED=false
+      - MAIL_FROM_ADDRESS=no-reply@example.com
+      - APP_DEBUG=false
+      - APP_KEY=<Generate with - artisan key:generate>
+      - APP_URL=https://status.example.com
+      - PROXY_URL=https://status.example.com
+      - DB_PASSWORD=<DB-Password>
+      - DB_HOST=odin-db
+      - DB_USERNAME=odin
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=<Redis-Password>
+    restart: always
+  odin-db:
+    image: mariadb:latest
+    restart: always
+    container_name: odin-db
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=<Set random>
+      - MYSQL_PASSWORD=<DB-Password>
+      - MYSQL_DATABASE=odin
+      - MYSQL_USER=odin
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server --requirepass <Redis-Password>
+    restart: always
+
+volumes:
+  db: {}
+  data: {}
