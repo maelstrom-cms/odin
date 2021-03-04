@@ -14,42 +14,42 @@ class AddForeignKeys extends Migration
     public function up()
     {
         Schema::table('open_graph_scans', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
 
         Schema::table('robot_scans', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
 
         Schema::table('dns_scans', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
 
         Schema::table('visual_diffs', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
 
         Schema::table('cron_pings', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
 
         Schema::table('uptime_scans', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
 
         Schema::table('certificate_scans', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
 
         Schema::table('crawled_pages', function (Blueprint $table) {
-            $table->bigInteger('website_id')->unsigned()->index()->change();
+            $table->bigIncrements('website_id')->unsigned()->index()->change();
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
         });
     }
