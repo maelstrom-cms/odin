@@ -44,29 +44,28 @@ class Certificate
             $ignoreMismatch = false
         );
 
-        # Do proper SSL Check of whole chain
-        $ssloptions = array(
-            "capture_peer_cert_chain" => true,
-            "allow_self_signed"=>false,
-            "CN_match"=>$this->website->certificate_hostname,
-            "verify_peer"=>true,
-            "SNI_enabled"=>true,
-            "SNI_server_name"=>$this->website->certificate_hostname,
-            "cafile"=>'/etc/ssl/certs/ca-certificates.crt' //mozilla ca cert bundle: http://curl.haxx.se/docs/caextract.html
-        );
+        $ssloptions = [
+            'capture_peer_cert_chain' => true,
+            'allow_self_signed' => false,
+            'CN_match' => $this->website->certificate_hostname,
+            'verify_peer' => true,
+            'SNI_enabled' => true,
+            'SNI_server_name' => $this->website->certificate_hostname,
+            'cafile' => '/etc/ssl/certs/ca-certificates.crt'
+        ];
 
-        $ctx = stream_context_create( array("ssl" => $ssloptions) );
-        $result = stream_socket_client("ssl://".$this->website->certificate_hostname.":443", $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $ctx);
+        $ctx = stream_context_create(['ssl' => $ssloptions]);
+        $result = stream_socket_client('ssl://'.$this->website->certificate_hostname.':443', $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $ctx);
         $cont = stream_context_get_params($result);
-        $first = True;
-        $scan = Null;
-        foreach($cont["options"]["ssl"]["peer_certificate_chain"] as $cert)
+        $first = true;
+        $scan = null;
+        foreach($cont['options']['ssl']['peer_certificate_chain'] as $cert)
         {
             openssl_x509_export($cert, $pem_encoded);
             $certificate = SslCertificate::createFromString($pem_encoded);
 
             if ($first) {
-                $first = False;
+                $first = false;
 
                 $scan = new CertificateScan([
                     'issuer' => $certificate->getIssuer(),
@@ -133,7 +132,6 @@ class Certificate
             $notification = new CertificateIsWeak($this->website, $this->scan);
         }
 
-        # Check expiry of Intermediate Certificates
         foreach(IntermediateCertificateScan::where('certificate_scan_id', $this->scan->id)->get() as $int_cert) {
             if (!$int_cert->was_valid) {
                 $notification = new CertificateIsInvalid($this->website, $this->scan);
