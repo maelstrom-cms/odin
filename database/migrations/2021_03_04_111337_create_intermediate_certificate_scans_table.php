@@ -15,7 +15,7 @@ class CreateIntermediateCertificateScansTable extends Migration
     {
         Schema::create('intermediate_certificate_scans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('certificate_scan_id')->unsigned()->index();
+            $table->bigInteger('certificate_scan_id')->unsigned()->index();
             $table->foreign('certificate_scan_id')->references('id')->on('certificate_scans')->onDelete('cascade');
             $table->string('issuer');
             $table->string('common_name');
