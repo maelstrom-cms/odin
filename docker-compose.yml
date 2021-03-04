@@ -8,6 +8,9 @@ services:
       dockerfile: Dockerfile
     container_name: odin
     shm_size: '2gb'
+    depends_on:
+      - odin-db
+      - redis
     security_opt:
       - seccomp:./chrome.json
     ports:
