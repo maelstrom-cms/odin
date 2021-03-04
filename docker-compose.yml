@@ -1,0 +1,56 @@
+version: "3.3"
+
+services:
+  odin:
+    image: odin:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: odin
+    shm_size: '2gb'
+    depends_on:
+      - odin-db
+      - redis
+    security_opt:
+      - seccomp:./chrome.json
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - app:/var/www/storage
+    environment:
+      - REGISTRATIONS_ENABLED=true
+      - ENFORCE_DOMAIN=false
+      - HORIZON_ENABLED=true
+      - DEBUGBAR_ENABLED=false
+      - QUEUE_CONNECTION=redis
+      - MAIL_FROM_ADDRESS=no-reply@ixolit.com
+      - APP_DEBUG=false
+      - APP_KEY=base64:MrL+FkntVikKuJYzMAavYrC/FXA3aT6tNGpkwRw8Ef8=
+      - APP_URL=http://localhost:8080
+      - PROXY_URL=http://localhost:8080
+      - DB_PASSWORD=db_password1234
+      - DB_HOST=odin-db
+      - DB_USERNAME=odin
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=redis_password1234
+    restart: always
+  odin-db:
+    image: mariadb:latest
+    restart: always
+    container_name: odin-db
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=db_root_password
+      - MYSQL_PASSWORD=db_password1234
+      - MYSQL_DATABASE=odin
+      - MYSQL_USER=odin
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server --requirepass redis_password1234
+    restart: always
+
+volumes:
+  app: {}
+  db: {}
