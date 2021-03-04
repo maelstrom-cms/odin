@@ -62,10 +62,11 @@ class Certificate
         $scan = Null;
         foreach($cont["options"]["ssl"]["peer_certificate_chain"] as $cert)
         {
+            openssl_x509_export($cert, $pem_encoded);
+            $certificate = SslCertificate::createFromString($pem_encoded);
+
             if ($first) {
                 $first = False;
-                openssl_x509_export($cert, $pem_encoded);
-                $certificate = SslCertificate::createFromString($pem_encoded);
 
                 $scan = new CertificateScan([
                     'issuer' => $certificate->getIssuer(),
@@ -79,9 +80,8 @@ class Certificate
                 ]);
 
                 $this->website->certificates()->save($scan);
+                continue;
             }
-            openssl_x509_export($cert, $pem_encoded);
-            $certificate = SslCertificate::createFromString($pem_encoded);
 
             $int_scan = new IntermediateCertificateScan([
                 'issuer' => $certificate->getIssuer(),
