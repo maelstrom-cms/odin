@@ -161,7 +161,7 @@ class Website extends Model
             }
 
             if ($this->visual_diff_enabled) {
-                VisualDiffCheck::dispatch($this);
+                VisualDiffCheck::dispatch($this, $this->url);
             }
         } catch (Exception $e) {
             logger($e->getMessage());

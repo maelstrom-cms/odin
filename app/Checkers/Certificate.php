@@ -59,7 +59,7 @@ class Certificate
         $result = stream_socket_client("ssl://".$this->website->certificate_hostname.":443", $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $ctx);
         $cont = stream_context_get_params($result);
         $first = True;
-        $scan = None;
+        $scan = Null;
         foreach($cont["options"]["ssl"]["peer_certificate_chain"] as $cert)
         {
             if ($first) {
