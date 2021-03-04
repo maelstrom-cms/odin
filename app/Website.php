@@ -201,8 +201,6 @@ class Website extends Model
      */
     public function setUrlAttribute($value)
     {
-        $parts = parse_url($value);
-
-        $this->attributes['url'] = sprintf('%s://%s', $parts['scheme'], $parts['host']);
+        $this->attributes['url'] = $value;
     }
 }

@@ -16,7 +16,8 @@ trait HasRobots
 
     public function getRobotsUrlAttribute()
     {
-        return $this->url . '/robots.txt';
+        parts = parse_url($this->url);
+        return sprintf('%s://%s/robots.txt', $parts['scheme'], $parts['host']);
     }
 
 }
