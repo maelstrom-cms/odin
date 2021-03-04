@@ -130,6 +130,24 @@ export default class CertificateReport extends React.Component {
                         <div className="flex items-center" style={{ color: (this.state.did_expire ? RED : GREEN ) }}><Icon style={{ fontSize: 20, marginRight: 10 }} type={ this.state.did_expire ? 'check-circle' : 'close-circle' } /> { this.state.did_expire ? 'Yes' : 'No' }</div>
                     </div>
                 </div>
+                <hr />
+                <h3>Intermediate Certificates:</h3>
+                {this.state.intermediates.map((intermediate, i) => {
+                  return (<div className="flex flex-wrap mt-5">
+                    <div className="w-1/3 pr-5">
+                        <div className="font-bold mb-2">Common Name:</div>
+                        { intermediate.common_name }
+                    </div>
+                    <div className="w-1/3 mt-5 pr-32">
+                        <div className="font-bold mb-2">Expires In:</div>
+                        { intermediate.expires_in }
+                    </div>
+                    <div className="w-1/3 mt-5">
+                        <div className="font-bold mb-2">Has Expired:</div>
+                        <div className="flex items-center" style={{ color: (intermediate.did_expire ? RED : GREEN ) }}><Icon style={{ fontSize: 20, marginRight: 10 }} type={ intermediate.did_expire ? 'check-circle' : 'close-circle' } /> { intermediate.did_expire ? 'Yes' : 'No' }</div>
+                    </div>
+                </div>)
+                })}
             </>
         )
     };

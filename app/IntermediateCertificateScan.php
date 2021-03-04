@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CertificateScan extends Model
+class IntermediateCertificateScan extends Model
 {
     protected $guarded = [];
 
     protected $casts = [
-        'additional_domains' => 'array',
+        'common_name' => 'string',
         'valid_from' => 'datetime',
         'valid_to' => 'datetime',
         'was_valid' => 'boolean',
@@ -25,8 +25,9 @@ class CertificateScan extends Model
         return now()->diffAsCarbonInterval($this->valid_to)->forHumans(['join' => true]);
     }
 
-    public function intermediates()
+    public function certificate()
     {
-        return $this->hasMany(IntermediateCertificateScan::class);
+        return $this->belongsTo(CertificateScan::class);
     }
 }
+
