@@ -90,7 +90,7 @@ class VisualDiff
                 Storage::disk('screenshots')->path($this->scan->diff_path)
             );
 
-            $this->scan->diff_found = data_get($diff, 'pixels', 0) > 20;
+            $this->scan->diff_found = data_get($diff, 'pixels', 0) > 40;
         } catch (Exception $exception) {
             if (app()->environment('dev')) {
                 throw $exception;
