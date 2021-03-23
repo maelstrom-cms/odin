@@ -21,7 +21,7 @@ class CertificateReportController extends Controller
             CertificateCheck::dispatchNow($website);
         }
 
-        $scan = $website->certificates()->latest()->first();
+        $scan = $website->certificates()->with('intermediates')->latest()->first();
 
         if (!$scan) {
             return [
